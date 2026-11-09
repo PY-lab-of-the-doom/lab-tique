@@ -1,8 +1,16 @@
+# Les aperçus de partage exigent des URL absolues : au déploiement,
+# Netlify remplace l'adresse par défaut par l'adresse réelle du site ($URL).
 [build]
   publish = "."
+  command = "if [ -n \"$URL\" ]; then sed -i \"s|https://la-butique.netlify.app|$URL|g\" index.html; fi"
 
 [[headers]]
   for = "/*"
   [headers.values]
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[headers]]
+  for = "/assets/*.png"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"

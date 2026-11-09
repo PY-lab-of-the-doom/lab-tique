@@ -412,6 +412,7 @@ mark.m-blue { background: var(--blue); color: #fff; }
 .delfine-features div { padding: 12px 14px; border: 1px solid var(--ink); }
 .delfine-features dt { font: .9rem/1.1 var(--f-display); text-transform: uppercase; margin-bottom: 4px; }
 .delfine-features dd { margin: 0; font-size: .84rem; line-height: 1.45; }
+.delfine-toggle { display: none; }
 .delfine-buy { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; }
 .delfine-price { margin: 0; font: 2.4rem/1 var(--f-display); }
 .delfine-price small { display: block; max-width: 34ch; margin-top: 6px; font: .72rem/1.4 var(--f-mono); }
@@ -428,6 +429,9 @@ mark.m-blue { background: var(--blue); color: #fff; }
   .delfine-name { font-size: 3.2rem; }
   .delfine-tagline { font-size: .95rem; }
   .delfine-features { grid-template-columns: minmax(0, 1fr); }
+  .delfine-toggle { display: flex; width: 100%; justify-content: space-between; background: #fff; font-size: .8rem; min-height: 48px; }
+  .delfine:not(.expanded) .delfine-features { display: none; }
+  .delfine.expanded .delfine-toggle { background: var(--acid); }
   .delfine-price { font-size: 2rem; }
   .delfine-buy .btn { width: 100%; }
 }

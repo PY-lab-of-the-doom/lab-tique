@@ -209,6 +209,15 @@
     renderProducts(b.dataset.cat);
   });
 
+  /* ---------- Del-Fine : info-dump repliable (mobile) ---------- */
+  const dfToggle = $(".delfine-toggle");
+  dfToggle.addEventListener("click", () => {
+    const open = $("#delfine").classList.toggle("expanded");
+    dfToggle.setAttribute("aria-expanded", String(open));
+    dfToggle.textContent = open ? "Refermer l'info-dump ↑" : "Lire l'info-dump (314 pages) ↓";
+    if (!open) $("#delfine").scrollIntoView({ block: "start" });
+  });
+
   /* ---------- Panier ---------- */
   const cart = new Map(); // id -> qty
   const cartEl = $("#cart");
