@@ -31,7 +31,11 @@
         if (i) { const sp = document.createElement("span"); sp.className = "nocase"; sp.textContent = "π"; frag.appendChild(sp); }
         if (part) frag.appendChild(document.createTextNode(part));
       });
-      n.replaceWith(frag);
+      // Dans un conteneur flex/grid, chaque morceau deviendrait une colonne :
+      // on regroupe le texte dans un seul span.
+      const d = getComputedStyle(n.parentElement).display;
+      if (/flex|grid/.test(d)) { const w = document.createElement("span"); w.appendChild(frag); n.replaceWith(w); }
+      else n.replaceWith(frag);
     });
   }
   keepPi(document.body);
@@ -464,7 +468,7 @@
     { d: "21 DÉC", s: "Mardi · 18 h", t: "Vente privée publique", p: "Ouverte à toutes et à tous, en toute intimité.", price: "15 €" },
     { d: "24 DÉC", s: "Vendredi · 14 h – 16 h", t: "Nocturne", p: "Une nocturne en plein jour, pour celles et ceux qui ne sortent pas le soir.", price: "20 €" },
     { d: "30 FÉV", s: "Jeudi · toute la journée", t: "Pop-up dans le pop-up", p: "Une boutique éphémère à l'intérieur de notre boutique éphémère-sédentaire, pour une durée encore plus limitée.", price: "90 €", st: "cancel" },
-    { d: "08 MARS", s: "Mercredi · 8 h 08", t: "Brunch Empowerment", p: "Un brunch réservé aux femmes dirigeantes, ouvert par une keynote de π, qui prendra la parole en premier pour ne pas influencer les échanges.", price: "88 € (après remise de 8 %)", st: "full" },
+    { d: "08 MARS", s: "Mercredi · 8 h 08", t: "Brunch Empowerment", p: "Un brunch réservé aux femmes dirigeantes, ouvert par une keynote de π, qui prendra la parole en premier pour ne pas influencer les échanges.", price: "88\u00a0€ (après remise de 8\u00a0%)", st: "full" },
     { d: "14 MARS", s: "Jour ouvré · 9 h 00 – 17 h 59", t: "π-Day : Escape-Storming™", p: "Brainstorming + escape game : on ne sort qu'avec un livrable. Ordre du jour détaillé ci-dessus.", price: "314 € HT", st: "wait" },
     { d: "15 MARS", s: "Mercredi · 20 h", t: "Soirée Retour de Mission", p: "π projette les 1 400 photos de son voyage de repérage là-bas, dont 1 380 où il figure. Cocktails aux fruits locaux de là-bas, acheminés par avion pour l'occasion.", price: "65 € (dont 1 € reversé là-bas)", st: "wait" },
     { d: "JEUDIS", s: "Hebdomadaire · 19 h", t: "Swap de ressentis", p: "Apportez une émotion dont vous ne vous servez plus. Repartez avec celle de quelqu'un d'autre. Néo-troc 100 % circulaire.", price: "12 €" },
