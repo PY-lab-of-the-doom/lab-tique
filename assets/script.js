@@ -128,6 +128,7 @@
     intentions: "Intentiöns",
     objets: "Objets (?)",
     comestibles: "Comestibles (a priori)",
+    neuro: "Neurö-inclusif",
   };
 
   const VISUALS = {
@@ -157,6 +158,7 @@
     { id: "rb", name: "Rëbranding Persönnel", cat: "intentions", v: "pi", price: 1900, desc: "Vous entrez. Vous ressortez. Vous êtes la même personne, avec une meilleure typographie.", meta: "Séance de 3 h 14 avec π" },
     { id: "seat", name: "Assise Partagée", cat: "objets", v: "lines", price: 75, unit: "/ session", desc: "Micro-ownership : non emportable, pleinement habitable pendant 7 minutes.", meta: "Réservation conseillée" },
     { id: "x", name: "Sans titre", cat: "matieres", v: "none", price: 3140, desc: "—", meta: "Réservé au Cercle π", members: true },
+    { id: "delfine", name: "Del-Fine™", cat: "neuro", price: 1618, featured: true },
     { id: "drop", name: "Mystery Drop", cat: "ressentis", v: "question", price: null, desc: "Sa nature sera révélée au moment précis où il ne sera plus disponible.", meta: "Épuisé avant la mise en ligne", soldout: true },
   ];
 
@@ -174,7 +176,8 @@
   });
 
   function renderProducts(cat = "tout") {
-    const list = PRODUCTS.filter((p) => cat === "tout" || p.cat === cat);
+    const list = PRODUCTS.filter((p) => !p.featured && (cat === "tout" || p.cat === cat));
+    $("#delfine").hidden = !(cat === "tout" || cat === "neuro");
     productsEl.innerHTML = list.map((p) => {
       const v = VISUALS[p.v];
       const price = p.price == null ? "—" : eur.format(p.price);
@@ -295,7 +298,7 @@
   }
   renderCart();
 
-  productsEl.addEventListener("click", (e) => {
+  $("#shop").addEventListener("click", (e) => {
     const add = e.target.closest("[data-add]");
     if (add) {
       const id = add.dataset.add;
@@ -304,7 +307,9 @@
       cartBtn.classList.remove("bump");
       void cartBtn.offsetWidth;
       cartBtn.classList.add("bump");
-      toast(pick(ADD_MSGS));
+      toast(id === "delfine"
+        ? "La Del-Fine™ a rejoint votre panier. Elle a besoin d'un temps d'adaptation."
+        : pick(ADD_MSGS));
       return;
     }
     if (e.target.closest("[data-members]")) {

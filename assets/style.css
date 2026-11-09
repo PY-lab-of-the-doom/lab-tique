@@ -361,6 +361,77 @@ mark.m-blue { background: var(--blue); color: #fff; }
 @media (max-width: 1100px) { .vals { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 640px) { .vals { grid-template-columns: minmax(0, 1fr); } }
 
+/* ---------- Del-Fine™ (produit vedette) ---------- */
+.delfine {
+  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  margin-bottom: 40px; background: var(--paper); color: var(--ink);
+  border: 3px solid var(--paper); box-shadow: 10px 10px 0 var(--acid);
+}
+.delfine-visual {
+  position: relative; overflow: hidden; min-height: 320px;
+  background: radial-gradient(circle at 50% 50%, #fff 0 18%, transparent 60%), #e9e3f7;
+  border-right: var(--line); display: grid; place-items: center;
+}
+.delfine-orb {
+  width: min(70%, 340px); aspect-ratio: 1; border-radius: 50%;
+  background: conic-gradient(from 0deg, var(--pink), var(--orange), var(--acid), #3fd7a8, var(--blue), #9b3fff, var(--pink));
+  border: var(--line); box-shadow: 8px 8px 0 var(--ink);
+  -webkit-mask: radial-gradient(circle, transparent 0 16%, #000 16.5%);
+          mask: radial-gradient(circle, transparent 0 16%, #000 16.5%);
+  animation: spin 14s linear infinite;
+}
+.delfine-drop {
+  position: absolute; top: 16px; left: 16px;
+  font: .8rem/1 var(--f-display); text-transform: uppercase;
+  background: var(--acid); border: var(--line); padding: 8px 10px; transform: rotate(-5deg);
+}
+.delfine-visual .cap {
+  position: absolute; left: 12px; bottom: 12px; font-size: .68rem; text-transform: uppercase;
+  background: var(--ink); color: var(--paper); padding: 2px 6px;
+}
+.delfine-body { padding: clamp(20px, 3vw, 36px); display: flex; flex-direction: column; gap: 16px; }
+.delfine-kicker { margin: 0; font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; }
+.delfine-name {
+  margin: 0; font: clamp(3rem, 7vw, 6rem)/.9 var(--f-display); letter-spacing: -.04em;
+  background: linear-gradient(90deg, var(--pink), var(--orange), #3fd7a8, var(--blue), #9b3fff);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  -webkit-text-stroke: 2px var(--ink);
+}
+.delfine-name sup { font-size: .3em; -webkit-text-stroke: 0; color: var(--ink); vertical-align: top; }
+.delfine-tagline { margin: 0; font-size: 1.05rem; }
+.delfine-badges { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.delfine-badges li {
+  font-size: .72rem; font-weight: 700; text-transform: uppercase;
+  border: 2px solid var(--ink); border-radius: 999px; padding: 4px 10px; background: #fff;
+}
+.delfine-badges li:nth-child(5n+1) { background: var(--pink); }
+.delfine-badges li:nth-child(5n+2) { background: var(--acid); }
+.delfine-badges li:nth-child(5n+3) { background: #c9c8ff; }
+.delfine-badges li:nth-child(5n+4) { background: #a8f0d6; }
+.delfine-features { margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border: var(--line); background: #fff; }
+.delfine-features div { padding: 12px 14px; border: 1px solid var(--ink); }
+.delfine-features dt { font: .9rem/1.1 var(--f-display); text-transform: uppercase; margin-bottom: 4px; }
+.delfine-features dd { margin: 0; font-size: .84rem; line-height: 1.45; }
+.delfine-buy { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; }
+.delfine-price { margin: 0; font: 2.4rem/1 var(--f-display); }
+.delfine-price small { display: block; max-width: 34ch; margin-top: 6px; font: .72rem/1.4 var(--f-mono); }
+.delfine-notes { margin: 0; font-size: .7rem; line-height: 1.5; opacity: .75; }
+
+@media (max-width: 900px) {
+  .delfine { grid-template-columns: minmax(0, 1fr); }
+  .delfine-visual { border-right: none; border-bottom: var(--line); min-height: 0; aspect-ratio: 4 / 3; }
+}
+@media (max-width: 640px) {
+  .delfine { box-shadow: 6px 6px 0 var(--acid); margin-bottom: 28px; border-width: 2px; }
+  .delfine-orb { width: 62%; box-shadow: 5px 5px 0 var(--ink); }
+  .delfine-body { padding: 18px 14px; gap: 14px; }
+  .delfine-name { font-size: 3.2rem; }
+  .delfine-tagline { font-size: .95rem; }
+  .delfine-features { grid-template-columns: minmax(0, 1fr); }
+  .delfine-price { font-size: 2rem; }
+  .delfine-buy .btn { width: 100%; }
+}
+
 /* Visuel « slogan » */
 .v-slogan { background: var(--pink); display: grid; place-items: center; }
 .v-slogan span { font: 1.9rem/0.9 var(--f-display); font-size: 21cqw; color: var(--ink); transform: rotate(-8deg); text-align: center; }
