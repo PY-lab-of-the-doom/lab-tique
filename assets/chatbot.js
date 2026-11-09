@@ -56,6 +56,10 @@
       "Vous êtes actuellement n° 314 dans la file d'attente de notre service client. Temps d'attente estimé : éphémère-sédentaire.",
       "Un humain ? Nous avons mieux : une présence augmentée. C'est moi.",
     ],
+    contact: [
+      "π ne répond pas directement, mais il a un Linktree : un lien qui mène à des liens. C'est très aligné.",
+      "Pour joindre π, passez par son Linktree. Il vous répondra quand la question sera mûre.",
+    ],
     hours: [
       "Nous sommes ouverts du mardi au samedi, en dehors des heures d'ouverture.",
       "Nos horaires sont slow : nous ouvrons quand l'intention est là. Elle n'est pas encore là.",
@@ -103,6 +107,7 @@
   const INTENTS = [
     ["thanks", /\b(merci|thx|thanks)\b/],
     ["bye", /\b(au revoir|bye|ciao|bonne (journee|soiree))\b/],
+    ["contact", /contact|joindre|linktree|insta|reseau|mail|telephone|numero|ecrire/],
     ["human", /\b(humain|conseill|vrai(e)? personne|agent|operat|quelqu.un|service client)/],
     ["delfine", /del.?fine|neuro|spectre|autis|tdah|zebre/],
     ["corporate", /pi.?day|escape|brainstorm|employab|emploi|\bcv\b|\bjob|travail|stage|recrut|livrable|scope|swot|teambuilding|cpf/],
@@ -182,10 +187,17 @@
         input = $("#bot-input"), quick = $(".bot-quick"), badge = $(".bot-badge"), nudge = $(".bot-nudge");
   let started = false, busy = false, botCount = 0;
 
-  function bubble(text, who) {
+  const LINK = "https://linktr.ee/peter7nance";
+  function bubble(text, who, withLink) {
     const b = document.createElement("div");
     b.className = "bot-msg from-" + who;
     b.textContent = text;
+    if (withLink) {
+      const a = document.createElement("a");
+      a.href = LINK; a.target = "_blank"; a.rel = "noopener";
+      a.className = "bot-link"; a.textContent = "linktr.ee/peter7nance ↗";
+      b.appendChild(a);
+    }
     log.appendChild(b);
     log.scrollTop = log.scrollHeight;
     return b;
@@ -198,13 +210,13 @@
     log.scrollTop = log.scrollHeight;
     return t;
   }
-  function say(text, then) {
+  function say(text, then, withLink) {
     busy = true;
     const t = typing(Math.random() < .25 ? "Bütler réfléchit à votre place…" : "");
     const delay = Math.min(600 + text.length * 18, 2600);
     setTimeout(() => {
       t.remove();
-      bubble(text, "bot");
+      bubble(text, "bot", withLink);
       busy = false;
       if (panel.hidden) { badge.hidden = false; }
       if (then) then();
@@ -235,7 +247,7 @@
     say(reply(intent), () => {
       botCount++;
       if (botCount % 3 === 0) survey();
-    });
+    }, intent === "contact" || intent === "human");
   }
 
   function open() {

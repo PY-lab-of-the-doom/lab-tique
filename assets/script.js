@@ -15,6 +15,31 @@
     set(k, v) { try { localStorage.setItem(k, v); } catch { /* slow-storage */ } },
   };
 
+  /* ---------- π reste π ----------
+     text-transform: uppercase transforme « π » en « Π ». On isole chaque π
+     dans un <span class="nocase">, y compris dans le contenu ajouté ensuite. */
+  function keepPi(root) {
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+      acceptNode: (n) => n.nodeValue.includes("π") && !n.parentElement.closest(".nocase, script, style, svg, title")
+        ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT,
+    });
+    const nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach((n) => {
+      const frag = document.createDocumentFragment();
+      n.nodeValue.split("π").forEach((part, i) => {
+        if (i) { const sp = document.createElement("span"); sp.className = "nocase"; sp.textContent = "π"; frag.appendChild(sp); }
+        if (part) frag.appendChild(document.createTextNode(part));
+      });
+      n.replaceWith(frag);
+    });
+  }
+  keepPi(document.body);
+  new MutationObserver((muts) => muts.forEach((m) => m.addedNodes.forEach((n) => {
+    if (n.nodeType === 1) keepPi(n);
+    else if (n.nodeType === 3 && n.parentElement) keepPi(n.parentElement);
+  }))).observe(document.body, { childList: true, subtree: true });
+
   /* ---------- Toast ---------- */
   const toastEl = $("#toast");
   let toastTimer;

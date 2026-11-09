@@ -582,6 +582,35 @@ mark.m-blue { background: var(--blue); color: #fff; }
 .infos dt { font: 1.1rem var(--f-display); text-transform: uppercase; margin-bottom: 8px; }
 .infos dd { margin: 0; }
 
+/* ---------- Contact (Linktree) ---------- */
+.contact {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: clamp(24px, 5vw, 64px); align-items: center;
+  margin-top: 48px; padding: clamp(22px, 4vw, 44px);
+  background: var(--acid); border: var(--line); box-shadow: 10px 10px 0 var(--ink);
+}
+.contact-kicker { margin: 0; font-size: .78rem; font-weight: 700; text-transform: uppercase; }
+.contact-title { margin: 4px 0 14px; font: clamp(2.4rem, 6vw, 4.6rem)/.9 var(--f-display); letter-spacing: -.03em; text-transform: uppercase; }
+.contact-text p { max-width: 52ch; }
+.contact-cta { margin-top: 8px; text-transform: none; }
+.contact-note { margin: 14px 0 0; font-size: .75rem; }
+.contact-phone {
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  width: 250px; padding: 30px 18px 26px; text-decoration: none; color: var(--ink);
+  background: var(--paper); border: var(--line); border-radius: 30px; box-shadow: 8px 8px 0 var(--pink);
+  transform: rotate(3deg); transition: transform .15s;
+}
+.contact-phone:hover { transform: rotate(0deg) translateY(-4px); }
+.cp-notch { width: 70px; height: 8px; border-radius: 999px; background: var(--ink); margin-bottom: 6px; }
+.cp-avatar { display: grid; place-items: center; width: 64px; height: 64px; border-radius: 50%; background: var(--pink); border: var(--line); font: italic 2.6rem/1 var(--f-serif); padding-bottom: 6px; }
+.cp-name { font-weight: 700; }
+.cp-bio { font-size: .66rem; text-align: center; line-height: 1.35; margin-bottom: 4px; }
+.cp-link { width: 100%; padding: 10px; text-align: center; font-size: .74rem; font-weight: 700; background: #fff; border: 2px solid var(--ink); border-radius: 999px; box-shadow: 3px 3px 0 var(--ink); }
+.cp-link-hot { background: var(--ink); color: var(--acid); }
+.pi-contact { margin-top: 24px; }
+.menu-contact { margin-top: 12px; }
+.footer-contact { margin: 0 0 12px; }
+.footer-contact a { color: var(--acid); font-weight: 700; }
+
 /* ---------- Footer ---------- */
 .footer { background: var(--ink); color: var(--paper); padding: 48px var(--gutter) 64px; font-size: .85rem; }
 .footer-logo { font: clamp(3rem, 15vw, 12rem)/.85 var(--f-display); color: var(--acid); margin: 0 0 24px; letter-spacing: -.04em; }
@@ -647,6 +676,7 @@ mark.m-blue { background: var(--blue); color: #fff; }
 .toast.show { transform: translate(-50%, 0); }
 
 /* ---------- Bütler™ (chatbot) ---------- */
+.nocase { text-transform: none; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .bot { position: fixed; right: 20px; bottom: 20px; z-index: 70; display: flex; flex-direction: column; align-items: flex-end; gap: 12px; }
 .bot-fab {
@@ -688,6 +718,7 @@ mark.m-blue { background: var(--blue); color: #fff; }
 .bot-msg { max-width: 85%; padding: 10px 12px; font-size: .86rem; line-height: 1.45; border: 2px solid var(--ink); overflow-wrap: anywhere; }
 .bot-msg.from-bot { align-self: flex-start; background: #fff; box-shadow: 3px 3px 0 var(--pink); }
 .bot-msg.from-user { align-self: flex-end; background: var(--blue); color: #fff; box-shadow: 3px 3px 0 var(--ink); }
+.bot-link { display: block; margin-top: 8px; font-weight: 700; color: var(--ink); background: var(--acid); border: 2px solid var(--ink); padding: 4px 8px; text-decoration: none; width: fit-content; }
 .bot-typing { display: flex; align-items: center; gap: 4px; }
 .bot-typing span { width: 7px; height: 7px; border-radius: 50%; background: var(--ink); animation: blip 1s infinite; }
 .bot-typing span:nth-child(2) { animation-delay: .15s; }
@@ -884,6 +915,12 @@ mark.m-blue { background: var(--blue); color: #fff; }
 
   /* Infos */
   .infos div { padding: 18px 16px; }
+
+  /* Contact */
+  .contact { grid-template-columns: minmax(0, 1fr); margin-top: 36px; padding: 22px 16px; box-shadow: 6px 6px 0 var(--ink); }
+  .contact-cta { width: 100%; font-size: .9rem; }
+  .contact-phone { width: min(250px, 100%); margin: 8px auto 0; transform: rotate(2deg); }
+  .pi-contact { width: 100%; }
 
   /* Footer */
   .footer { padding: 40px 16px calc(48px + env(safe-area-inset-bottom)); }
