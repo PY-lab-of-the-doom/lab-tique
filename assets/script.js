@@ -79,7 +79,7 @@
   $("#menu-close").addEventListener("click", () => closeMenu());
   menu.addEventListener("click", (e) => { if (e.target.closest("a")) closeMenu(false); });
   document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeMenu(); });
-  window.matchMedia("(min-width: 901px)").addEventListener("change", (e) => { if (e.matches) closeMenu(false); });
+  window.matchMedia("(min-width: 1151px)").addEventListener("change", (e) => { if (e.matches) closeMenu(false); });
 
   /* ---------- Marquee : boucle infinie ---------- */
   const marquee = $("#marquee");
@@ -142,6 +142,7 @@
     grain: { cls: "v-grain", cap: "Mise au point volontairement libre" },
     lines: { cls: "v-lines", cap: "Plan technique" },
     water: { cls: "v-water", cap: "Suggestion de présentation" },
+    earth: { cls: "v-earth", inner: "<span>100 g</span>", cap: "Récolté à la main, là-bas" },
     slogan: { cls: "v-slogan", inner: "<span>EMPOW<br>ERMENT</span>", cap: "Message fort" },
   };
 
@@ -152,6 +153,7 @@
     { id: "share", name: "Pass Share-Care", cat: "intentions", v: "hand", price: 120, unit: "/ mois", desc: "Vous prêtez quelque chose à quelqu'un. Nous sécurisons le flux.", meta: "Sans engagement (engagement moral requis)" },
     { id: "sil", name: "Silence — Live at La Bütique", cat: "ressentis", v: "none", price: 45, desc: "Captation intégrale de notre dernier concert. Format : aucun. Durée : la vôtre.", meta: "Pressage limité" },
     { id: "m3", name: "Matière n°3", cat: "matieres", v: "fabric", price: 560, desc: "Texture. Origine : quelque part entre ici et ailleurs. Usage à co-définir en boutique.", meta: "Vendue au mètre (ou à l'heure)" },
+    { id: "terre", name: "Terre de Là-Bas™", cat: "matieres", v: "earth", price: 240, desc: "Une poignée de terre authentique, récoltée à la main par une communauté locale. Le reste de la terre nous appartient aussi.", meta: "Origine : là-bas · acheminée par avion" },
     { id: "lev", name: "Levain d'Intentiön", cat: "comestibles", v: "grain", price: 28, desc: "Fermentation 72 jours. Servi en visualisation guidée. Croûte en option.", meta: "Zéro-cuisine · zéro-miette" },
     { id: "tote", name: "Tote Bag Upcyclé", cat: "objets", v: "question", price: 210, desc: "Upcyclé à partir d'un autre tote bag. Peut contenir. Ne contient pas.", meta: "Pièce unique, en série" },
     { id: "soro", name: "Tote « Sororité »", cat: "intentions", v: "slogan", price: 290, desc: "Coton bio, slogan engagé. 1 % reversé à notre propre campagne de sensibilisation.", meta: "Taxe rose responsable incluse" },
@@ -362,6 +364,7 @@
     { d: "24 DÉC", s: "Vendredi · 14 h – 16 h", t: "Nocturne", p: "Une nocturne en plein jour, pour celles et ceux qui ne sortent pas le soir.", price: "20 €" },
     { d: "30 FÉV", s: "Jeudi · toute la journée", t: "Pop-up dans le pop-up", p: "Une boutique éphémère à l'intérieur de notre boutique éphémère-sédentaire, pour une durée encore plus limitée.", price: "90 €", st: "cancel" },
     { d: "08 MARS", s: "Mercredi · 8 h 08", t: "Brunch Empowerment", p: "Un brunch réservé aux femmes dirigeantes, ouvert par une keynote de π, qui prendra la parole en premier pour ne pas influencer les échanges.", price: "88 € (après remise de 8 %)", st: "full" },
+    { d: "15 MARS", s: "Mercredi · 20 h", t: "Soirée Retour de Mission", p: "π projette les 1 400 photos de son voyage de repérage là-bas, dont 1 380 où il figure. Cocktails aux fruits locaux de là-bas, acheminés par avion pour l'occasion.", price: "65 € (dont 1 € reversé là-bas)", st: "wait" },
     { d: "JEUDIS", s: "Hebdomadaire · 19 h", t: "Swap de ressentis", p: "Apportez une émotion dont vous ne vous servez plus. Repartez avec celle de quelqu'un d'autre. Néo-troc 100 % circulaire.", price: "12 €" },
     { d: "DIMANCHES", s: "Square voisin · 12 h 30", t: "Food-sharing nomade", p: "Chacun apporte son repas et le consomme assis sur l'herbe, en communauté. Couverture pre-loved fournie (caution 40 €).", price: "18 €", st: "wait" },
   ];

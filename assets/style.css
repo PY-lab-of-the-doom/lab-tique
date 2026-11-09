@@ -115,7 +115,7 @@ mark.m-blue { background: var(--blue); color: #fff; }
 .menu-foot { margin: 16px 0 0; font-size: .75rem; text-transform: uppercase; }
 
 .live {
-  position: sticky; top: 61px; z-index: 49;
+  position: sticky; top: 56px; z-index: 49;
   display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: center;
   padding: 6px var(--gutter);
   background: var(--ink); color: var(--paper);
@@ -440,6 +440,40 @@ mark.m-blue { background: var(--blue); color: #fff; }
 .v-slogan { background: var(--pink); display: grid; place-items: center; }
 .v-slogan span { font: 1.9rem/0.9 var(--f-display); font-size: 21cqw; color: var(--ink); transform: rotate(-8deg); text-align: center; }
 
+/* ---------- Impact (greenwashing) ---------- */
+.section-green { background: #1fd17c; }
+.gw-meter { max-width: 900px; margin: 0 0 40px; }
+.gw-meter-head { display: flex; justify-content: space-between; gap: 12px; font-weight: 700; text-transform: uppercase; font-size: .85rem; margin-bottom: 8px; }
+.gw-bar { position: relative; display: flex; height: 44px; border: var(--line); background: #fff; box-shadow: var(--shadow-sm); overflow: hidden; }
+.gw-fill { width: 3%; background: var(--acid); border-right: 3px solid var(--ink); }
+.gw-fees { flex: 1; display: flex; align-items: center; padding: 0 12px; font-size: .78rem; font-weight: 700; text-transform: uppercase;
+  background: repeating-linear-gradient(45deg, #fff 0 10px, #e8e8e8 10px 20px); }
+.gw-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: var(--line); background: #f3fff0; box-shadow: var(--shadow); }
+.gw-card { position: relative; padding: 24px 20px; border: 1.5px solid var(--ink); display: flex; flex-direction: column; gap: 10px; }
+.gw-card h3 { margin: 0; font: 1.25rem/1.05 var(--f-display); text-transform: uppercase; padding-right: 36px; }
+.gw-card p { margin: 0; }
+.gw-leaf { position: absolute; top: 14px; right: 14px; font-size: 1.6rem; transform: rotate(18deg); }
+.gw-card-cta { background: var(--acid); }
+.gw-card-cta .btn { align-self: flex-start; margin-top: auto; }
+.gw-price { font: 1.5rem var(--f-display); }
+.gw-price small { display: block; font: .7rem var(--f-mono); text-transform: uppercase; }
+.gw-swipe { display: none; margin: 0 0 10px; font-size: .72rem; font-weight: 700; text-transform: uppercase; }
+.gw-labels { list-style: none; margin: 32px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+.gw-labels li { font-size: .75rem; font-weight: 700; text-transform: uppercase; background: #fff; border: 2px solid var(--ink); border-radius: 999px; padding: 6px 12px 6px 30px; position: relative; }
+.gw-labels li::before { content: "✓"; position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #0a8f4f; font-weight: 700; }
+.gw-quote {
+  margin: 44px 0 28px; padding: 24px; max-width: 760px;
+  background: var(--ink); color: #9dffc9; border: var(--line); box-shadow: 8px 8px 0 var(--acid);
+  font: italic clamp(1.5rem, 3.4vw, 2.3rem)/1.15 var(--f-serif); transform: rotate(1deg);
+}
+.gw-quote cite { display: block; margin-top: 12px; font: 700 .8rem var(--f-mono); font-style: normal; text-transform: uppercase; color: var(--acid); }
+.gw-stats { max-width: 760px; }
+@media (max-width: 1100px) { .gw-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* Visuel « terre » */
+.v-earth { background: radial-gradient(ellipse at 50% 70%, #5a3a1e 0 34%, #7a5230 35% 46%, transparent 47%), #e9dcc4; display: grid; place-items: center; }
+.v-earth span { font: 700 .8rem var(--f-mono); background: #fff; border: 2px solid var(--ink); padding: 2px 8px; transform: rotate(-6deg) translateY(-30%); }
+
 /* ---------- Quotes ---------- */
 .quotes { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 28px; }
 .quote { margin: 0; padding: 24px; border: var(--line); box-shadow: var(--shadow); background: #fff; }
@@ -548,10 +582,12 @@ mark.m-blue { background: var(--blue); color: #fff; }
 .toast.show { transform: translate(-50%, 0); }
 
 /* ---------- Responsive ---------- */
-@media (max-width: 900px) {
+@media (max-width: 1150px) {
   .nav { display: none; }
   .menu-btn { display: inline-flex; }
-  .live { top: 57px; }
+}
+@media (max-width: 900px) {
+
   .pi { grid-template-columns: 1fr; }
   .pi-portrait { max-width: 300px; }
   .s2 { display: none; }
@@ -661,6 +697,28 @@ mark.m-blue { background: var(--blue); color: #fff; }
   .val { padding: 20px 16px; }
   .val h3 { font-size: 1.15rem; }
   .fem-quote { margin: 36px 0 24px; padding: 18px; font-size: 1.35rem; box-shadow: 6px 6px 0 var(--ink); }
+
+  /* Impact */
+  .gw-meter { margin-bottom: 28px; }
+  .gw-meter-head { font-size: .72rem; }
+  .gw-bar { height: 40px; }
+  .gw-fees { font-size: .62rem; padding: 0 8px; }
+  .gw-grid {
+    display: flex; gap: 12px; overflow-x: auto; overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory; scrollbar-width: none;
+    margin: 0 -16px; padding: 4px 16px 14px; border: none; background: none; box-shadow: none;
+  }
+  .gw-grid::-webkit-scrollbar { display: none; }
+  .gw-card {
+    flex: 0 0 82%; scroll-snap-align: center; padding: 20px 16px;
+    border: var(--line); background: #f3fff0; box-shadow: 5px 5px 0 var(--ink);
+  }
+  .gw-card-cta { background: var(--acid); }
+  .gw-swipe { display: block; }
+  .gw-card h3 { font-size: 1.12rem; }
+  .gw-card-cta .btn { width: 100%; }
+  .gw-labels li { font-size: .66rem; }
+  .gw-quote { margin: 36px 0 24px; padding: 18px; font-size: 1.35rem; box-shadow: 6px 6px 0 var(--acid); }
 
   /* Presse */
   .quotes { gap: 20px; }
