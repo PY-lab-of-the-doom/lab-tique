@@ -728,10 +728,9 @@ mark.m-blue { background: var(--blue); color: #fff; }
 .bot-survey { align-self: flex-start; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; padding: 8px 10px; border: 2px dashed var(--ink); background: var(--acid); font-size: .78rem; }
 .bot-survey p { margin: 0 6px 0 0; }
 .bot-survey button { background: #fff; border: 2px solid var(--ink); padding: 2px 8px; cursor: pointer; font-size: 1rem; }
-.bot-quick { display: flex; gap: 6px; overflow-x: auto; padding: 8px 12px; border-top: 2px solid var(--ink); scrollbar-width: none; }
-.bot-quick::-webkit-scrollbar { display: none; }
+.bot-quick { display: flex; flex-wrap: wrap; gap: 6px; padding: 8px 12px; border-top: 2px solid var(--ink); }
 .bot-quick:empty { display: none; }
-.bot-quick button { flex: none; background: #fff; border: 2px solid var(--ink); border-radius: 999px; padding: 6px 10px; font: 700 .72rem var(--f-mono); cursor: pointer; color: var(--ink); }
+.bot-quick button { flex: 0 1 auto; max-width: 100%; white-space: normal; text-align: left; background: #fff; border: 2px solid var(--ink); border-radius: 999px; padding: 6px 10px; font: 700 .72rem var(--f-mono); cursor: pointer; color: var(--ink); }
 .bot-quick button:hover { background: var(--acid); }
 .bot-form { display: flex; border-top: var(--line); }
 .bot-form input { flex: 1; min-width: 0; border: none; padding: 12px; font: 16px var(--f-mono); background: #fff; color: var(--ink); }
