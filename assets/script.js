@@ -40,6 +40,9 @@
     else if (n.nodeType === 3 && n.parentElement) keepPi(n.parentElement);
   }))).observe(document.body, { childList: true, subtree: true });
 
+  /* Signale une action au Club (assets/club.js) pour les Bütique Points. */
+  const bq = (id) => document.dispatchEvent(new CustomEvent("bq", { detail: id }));
+
   /* ---------- Toast ---------- */
   const toastEl = $("#toast");
   let toastTimer;
@@ -104,7 +107,7 @@
   $("#menu-close").addEventListener("click", () => closeMenu());
   menu.addEventListener("click", (e) => { if (e.target.closest("a")) closeMenu(false); });
   document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeMenu(); });
-  window.matchMedia("(min-width: 1151px)").addEventListener("change", (e) => { if (e.matches) closeMenu(false); });
+  window.matchMedia("(min-width: 1251px)").addEventListener("change", (e) => { if (e.matches) closeMenu(false); });
 
   /* ---------- Marquee : boucle infinie ---------- */
   const marquee = $("#marquee");
@@ -142,6 +145,8 @@
     }
     cookie.hidden = true;
     store.set("butique-cookies", kind);
+    if (kind === "refuse") bq("cookie-refuse");
+    if (kind === "conscious") bq("cookie-conscious");
     toast(cookieMsgs[kind]);
   });
 
@@ -270,7 +275,7 @@
     "Votre candidature est hors scope. Nous la reprenons en off-line.",
     "Bien noté. On se fait un point pour faire le point.",
   ];
-  $("[data-piday]").addEventListener("click", () => toast(pick(PIDAY_MSGS)));
+  $("[data-piday]").addEventListener("click", () => { toast(pick(PIDAY_MSGS)); bq("piday"); });
 
   /* ---------- Del-Fine : visuel apaisant (non testé) ----------
      Rotation fluide qui « accroche » : à intervalles irréguliers, jamais deux
@@ -408,6 +413,7 @@
     if (add) {
       const id = add.dataset.add;
       cart.set(id, (cart.get(id) || 0) + 1);
+      bq(id === "delfine" ? "delfine-add" : "cart-add");
       renderCart();
       cartBtn.classList.remove("bump");
       void cartBtn.offsetWidth;
@@ -434,6 +440,7 @@
 
   checkout.addEventListener("click", () => {
     attempts++;
+    if (attempts === 3) bq("checkout-3");
     let i;
     do { i = Math.floor(Math.random() * REFUSALS.length); } while (i === lastRefusal);
     lastRefusal = i;
@@ -490,7 +497,7 @@
   }).join("");
 
   $("#events").addEventListener("click", (e) => {
-    if (e.target.closest("[data-book]")) toast(pick(BOOK_MSGS));
+    if (e.target.closest("[data-book]")) { toast(pick(BOOK_MSGS)); bq("book"); }
   });
 
   /* ---------- Liste d'attente ---------- */
@@ -528,6 +535,7 @@
     $("#wl-who").textContent = name;
     posEl.textContent = num.format(pos);
     form.hidden = true;
+    bq("waitlist");
     result.hidden = false;
     result.focus();
     toast(form.elements.pi.checked ? "Candidature transmise. π vous recontactera (ou non)." : "Candidature transmise à l'algorithme.");

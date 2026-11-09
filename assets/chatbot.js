@@ -56,6 +56,11 @@
       "Vous êtes actuellement n° 314 dans la file d'attente de notre service client. Temps d'attente estimé : éphémère-sédentaire.",
       "Un humain ? Nous avons mieux : une présence augmentée. C'est moi.",
     ],
+    kofi: [
+      "Vous souhaitez soutenir π ? Offrez-lui un décaféiné matcha éco-responsable, gender-friendly et sourcé là-bas, servi tiède pour ne brusquer personne.",
+      "Votre générosité sera transformée en impact positif, après déduction des frais de fonctionnement (97 %). Le reste améliorera le monde.",
+      "Vous voulez de l'aide ? Aidez-nous d'abord. Un décaféiné suffit, idéalement oat-latte, idéalement maintenant.",
+    ],
     contact: [
       "π ne répond pas directement, mais il a un Linktree : un lien qui mène à des liens. C'est très aligné.",
       "Pour joindre π, passez par son Linktree. Il vous répondra quand la question sera mûre.",
@@ -107,6 +112,7 @@
   const INTENTS = [
     ["thanks", /\b(merci|thx|thanks)\b/],
     ["bye", /\b(au revoir|bye|ciao|bonne (journee|soiree))\b/],
+    ["kofi", /ko.?fi|soutenir|soutien|\bdon\b|donation|\bcafe\b|\btip\b|pourboire|aider|mecen|financer/],
     ["contact", /contact|joindre|linktree|insta|reseau|mail|telephone|numero|ecrire/],
     ["human", /\b(humain|conseill|vrai(e)? personne|agent|operat|quelqu.un|service client)/],
     ["delfine", /del.?fine|neuro|spectre|autis|tdah|zebre/],
@@ -187,15 +193,19 @@
         input = $("#bot-input"), quick = $(".bot-quick"), badge = $(".bot-badge"), nudge = $(".bot-nudge");
   let started = false, busy = false, botCount = 0;
 
-  const LINK = "https://linktr.ee/peter7nance";
+  const LINKS = {
+    contact: ["https://linktr.ee/peter7nance", "linktr.ee/peter7nance ↗"],
+    kofi: ["https://ko-fi.com/pierreyvessevenants", "Offrir un décaféiné (Ko-fi) ↗"],
+  };
   function bubble(text, who, withLink) {
     const b = document.createElement("div");
     b.className = "bot-msg from-" + who;
     b.textContent = text;
     if (withLink) {
       const a = document.createElement("a");
-      a.href = LINK; a.target = "_blank"; a.rel = "noopener";
-      a.className = "bot-link"; a.textContent = "linktr.ee/peter7nance ↗";
+      const [href, label] = LINKS[withLink];
+      a.href = href; a.target = "_blank"; a.rel = "noopener";
+      a.className = "bot-link"; a.textContent = label;
       b.appendChild(a);
     }
     log.appendChild(b);
@@ -247,7 +257,8 @@
     say(reply(intent), () => {
       botCount++;
       if (botCount % 3 === 0) survey();
-    }, intent === "contact" || intent === "human");
+    }, intent === "kofi" ? "kofi" : (intent === "contact" || intent === "human") ? "contact" : null);
+    if (intent === "human") document.dispatchEvent(new CustomEvent("bq", { detail: "bot-human" }));
   }
 
   function open() {
@@ -258,6 +269,7 @@
     root.classList.add("open");
     if (!started) {
       started = true;
+      document.dispatchEvent(new CustomEvent("bq", { detail: "bot-open" }));
       renderQuick();
       say(reply("greet"));
     }
