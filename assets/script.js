@@ -226,6 +226,39 @@
   ];
   $("[data-piday]").addEventListener("click", () => toast(pick(PIDAY_MSGS)));
 
+  /* ---------- Del-Fine : visuel apaisant (non testé) ----------
+     Rotation fluide qui « accroche » : à intervalles irréguliers, jamais deux
+     fois le même, le disque saute brusquement d'un cran. */
+  const orb = $(".delfine-orb");
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  if (orb) {
+    const SPEED = 360 / 14000;      // un tour en 14 s
+    let angle = 0, last = 0, nextJump = 0, lastGap = 0, visible = true, raf = 0;
+    const rand = (a, b) => a + Math.random() * (b - a);
+    function planJump(now) {
+      let gap;
+      do { gap = rand(900, 6500); } while (Math.abs(gap - lastGap) < 400); // jamais le même rythme
+      lastGap = gap;
+      nextJump = now + gap;
+    }
+    function frame(now) {
+      if (!last) { last = now; planJump(now); }
+      angle += (now - last) * SPEED;
+      last = now;
+      if (now >= nextJump) {
+        angle += rand(9, 24);       // le cran
+        planJump(now);
+      }
+      orb.style.transform = `rotate(${angle.toFixed(2)}deg)`;
+      raf = requestAnimationFrame(frame);
+    }
+    function start() { if (!raf && visible && !reduceMotion.matches && !document.hidden) { last = 0; raf = requestAnimationFrame(frame); } }
+    function stop() { cancelAnimationFrame(raf); raf = 0; }
+    new IntersectionObserver(([en]) => { visible = en.isIntersecting; visible ? start() : stop(); }).observe(orb);
+    document.addEventListener("visibilitychange", () => (document.hidden ? stop() : start()));
+    reduceMotion.addEventListener("change", () => (reduceMotion.matches ? stop() : start()));
+  }
+
   /* ---------- Del-Fine : info-dump repliable (mobile) ---------- */
   const dfToggle = $(".delfine-toggle");
   dfToggle.addEventListener("click", () => {

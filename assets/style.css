@@ -424,7 +424,7 @@ mark.m-blue { background: var(--blue); color: #fff; }
   border: var(--line); box-shadow: 8px 8px 0 var(--ink);
   -webkit-mask: radial-gradient(circle, transparent 0 16%, #000 16.5%);
           mask: radial-gradient(circle, transparent 0 16%, #000 16.5%);
-  animation: spin 14s linear infinite;
+  will-change: transform; /* rotation pilotée en JS (script.js : « rotation qui accroche ») */
 }
 .delfine-drop {
   position: absolute; top: 16px; left: 16px;
