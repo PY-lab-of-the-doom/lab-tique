@@ -91,6 +91,22 @@
     document.body.classList.toggle("locked", locks.size > 0);
   }
 
+  /* ---------- Navigation PC : menus déroulants ---------- */
+  const groups = $$(".nav-group");
+  const closeGroups = (except) => groups.forEach((g) => { if (g !== except) { g.classList.remove("open"); $(".nav-top", g).setAttribute("aria-expanded", "false"); } });
+  groups.forEach((g) => {
+    const btn = $(".nav-top", g);
+    btn.addEventListener("click", () => {
+      const open = !g.classList.contains("open");
+      closeGroups(g);
+      g.classList.toggle("open", open);
+      btn.setAttribute("aria-expanded", String(open));
+    });
+    $$(".nav-drop a", g).forEach((a) => a.addEventListener("click", () => closeGroups()));
+  });
+  document.addEventListener("click", (e) => { if (!e.target.closest(".nav-group")) closeGroups(); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeGroups(); });
+
   /* ---------- Menu mobile ---------- */
   const menu = $("#menu");
   const menuBtn = $("#menu-open");
@@ -111,7 +127,7 @@
   $("#menu-close").addEventListener("click", () => closeMenu());
   menu.addEventListener("click", (e) => { if (e.target.closest("a")) closeMenu(false); });
   document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeMenu(); });
-  window.matchMedia("(min-width: 1251px)").addEventListener("change", (e) => { if (e.matches) closeMenu(false); });
+  window.matchMedia("(min-width: 1001px)").addEventListener("change", (e) => { if (e.matches) closeMenu(false); });
 
   /* ---------- Marquee : boucle infinie ---------- */
   const marquee = $("#marquee");
@@ -194,6 +210,12 @@
     { id: "rb", name: "Rëbranding Persönnel", cat: "intentions", v: "pi", price: 1900, desc: "Vous entrez. Vous ressortez. Vous êtes la même personne, avec une meilleure typographie.", meta: "Séance de 3 h 14 avec π" },
     { id: "seat", name: "Assise Partagée", cat: "objets", v: "lines", price: 75, unit: "/ session", desc: "Micro-ownership : non emportable, pleinement habitable pendant 7 minutes.", meta: "Réservation conseillée" },
     { id: "x", name: "Sans titre", cat: "matieres", v: "none", price: 3140, desc: "—", meta: "Réservé au Cercle π", members: true },
+    { id: "mini-eveil", name: "Atelier d'éveil sensoriel", cat: "mini", price: 180, mini: true },
+    { id: "mini-poussette", name: "Poussette Terre-Mère™", cat: "mini", price: 3000, mini: true },
+    { id: "mini-cube", name: "Cube en bois brut, sans projection parentale", cat: "mini", price: 290, mini: true },
+    { id: "mini-cage", name: "Espace d'autonomie contenue™", cat: "mini", price: 1618, mini: true },
+    { id: "mini-tempete", name: "Kit Tempête Émotionnelle", cat: "mini", price: 89, mini: true },
+    { id: "mini-prenom", name: "Prénom curaté", cat: "mini", price: 314, mini: true },
     { id: "delfine", name: "Del-Fine™", cat: "neuro", price: 1618, featured: true },
     { id: "drop", name: "Mystery Drop", cat: "ressentis", v: "question", price: null, desc: "Sa nature sera révélée au moment précis où il ne sera plus disponible.", meta: "Épuisé avant la mise en ligne", soldout: true },
   ];
@@ -212,7 +234,7 @@
   });
 
   function renderProducts(cat = "tout") {
-    const list = PRODUCTS.filter((p) => !p.featured && (cat === "tout" || p.cat === cat));
+    const list = PRODUCTS.filter((p) => !p.featured && !p.mini && (cat === "tout" || p.cat === cat));
     $("#delfine").hidden = !(cat === "tout" || cat === "neuro");
     productsEl.innerHTML = list.map((p) => {
       const v = VISUALS[p.v];
@@ -412,18 +434,20 @@
   }
   renderCart();
 
-  $("#shop").addEventListener("click", (e) => {
+  document.querySelector("main").addEventListener("click", (e) => {
     const add = e.target.closest("[data-add]");
     if (add) {
       const id = add.dataset.add;
       cart.set(id, (cart.get(id) || 0) + 1);
-      bq(id === "delfine" ? "delfine-add" : "cart-add");
+      bq(id === "delfine" ? "delfine-add" : id.startsWith("mini-") ? "mini-add" : "cart-add");
       renderCart();
       cartBtn.classList.remove("bump");
       void cartBtn.offsetWidth;
       cartBtn.classList.add("bump");
       toast(id === "delfine"
         ? "La Del-Fine™ a rejoint votre panier. Elle a besoin d'un temps d'adaptation."
+        : id === "mini-cage" ? "Espace d'autonomie contenue ajouté. Votre enfant est libre (à l'intérieur)."
+        : id.startsWith("mini-") ? "Ajouté. Votre enfant vous remerciera en thérapie."
         : pick(ADD_MSGS));
       return;
     }

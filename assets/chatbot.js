@@ -56,6 +56,14 @@
       "Vous êtes actuellement n° 314 dans la file d'attente de notre service client. Temps d'attente estimé : éphémère-sédentaire.",
       "Un humain ? Nous avons mieux : une présence augmentée. C'est moi.",
     ],
+    mini: [
+      "Mini-Bütique accompagne votre parentalité bienveillante : éveil sensoriel dès 3 mois, cube sans projection parentale et notre best-seller, l'Espace d'autonomie contenue™.",
+      "Chez nous, on ne dit pas « caprice », on dit « tempête émotionnelle ». Et on ne dit pas « cage ». Profitez de −30 % de culpabilité, offre prolongée.",
+    ],
+    living: [
+      "Bütique Living propose une chambre « Atelier » de 9 m² sous verrière à 1 400 € par mois, dans un quartier en pleine transition. Vers quoi ? C'est la surprise.",
+      "Pour le dossier : revenus ≥ 3,14 × le loyer et deux garants dont un propriétaire. π a commencé comme vous : petit, dans 180 m².",
+    ],
     catering: [
       "Notre catering Edo-Terroir est une expérience : terrine de sushi au foie de veau, tripes en sashimi, blanquette-ramen. Les portions sont pensées pour la contemplation.",
       "Pour 40 convives, comptez environ 8 000 €. Chacun repartira avec 12 g de souvenirs et une vraie faim de culture.",
@@ -117,6 +125,8 @@
   const INTENTS = [
     ["thanks", /\b(merci|thx|thanks)\b/],
     ["bye", /\b(au revoir|bye|ciao|bonne (journee|soiree))\b/],
+    ["mini", /enfant|bebe|parent|montessori|poussette|creche|cage|eveil|bambin|naissance/],
+    ["living", /logement|appart|coliving|coloc|chambre|loyer|louer|habiter|quartier|immobilier|proprio/],
     ["catering", /catering|traiteur|buffet|cocktail|sushi|sashimi|tripe|terrine|repas|manger|faim|menu|cuisine|chef|plat\b/],
     ["kofi", /ko.?fi|soutenir|soutien|\bdon\b|donation|\bcafe\b|\btip\b|pourboire|aider|mecen|financer/],
     ["contact", /contact|joindre|linktree|insta|reseau|mail|telephone|numero|ecrire/],

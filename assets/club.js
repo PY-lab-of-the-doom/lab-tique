@@ -44,6 +44,9 @@
     "code": ["Initié·e au code", 31],
     "selfie": ["Visage aligné", 14],
     "catering": ["Cuisine centrale démasquée", 33],
+    "mini-add": ["Parentalité premium", 21],
+    "living": ["Locataire méritant·e", 33],
+    "merit": ["Méritocrate", 14],
   };
   const PI_TOTAL = 7, PI_PTS = 14;
 
@@ -470,6 +473,61 @@
     taps = taps.filter((t) => now - t < 900); taps.push(now);
     if (taps.length >= 3) { taps = []; e.preventDefault(); runCode(); }
   }));
+
+  /* ---------- Catering : défilé des plats dans l'assiette ---------- */
+  const plate = $(".plate");
+  if (plate) {
+    const dishes = $$(".dish", plate);
+    let di = 0, dt = 0, seen = false;
+    const show = (i) => {
+      dishes[di].classList.remove("active");
+      di = (i + dishes.length) % dishes.length;
+      dishes[di].classList.add("active");
+      $("#plate-name").textContent = dishes[di].dataset.name;
+      $("#plate-cap").textContent = dishes[di].dataset.cap;
+      $("#plate-num").textContent = `${di + 1}/${dishes.length}`;
+    };
+    const play = () => { if (!dt && seen && !still.matches && !document.hidden) dt = setInterval(() => show(di + 1), 2800); };
+    const stop = () => { clearInterval(dt); dt = 0; };
+    plate.addEventListener("click", () => { stop(); show(di + 1); play(); });
+    new IntersectionObserver(([en]) => { seen = en.isIntersecting; seen ? play() : stop(); }).observe(plate);
+    document.addEventListener("visibilitychange", () => (document.hidden ? stop() : play()));
+  }
+
+  /* ---------- Mini-Bütique : fausse urgence ---------- */
+  const mt = $("#mini-timer");
+  if (mt) {
+    let left = 194;
+    setInterval(() => {
+      left--;
+      if (left < 0) { mt.textContent = "offre prolongée"; if (left < -3) left = 194; return; }
+      mt.textContent = `${String(Math.floor(left / 60)).padStart(2, "0")}:${String(left % 60).padStart(2, "0")}`;
+    }, 1000);
+  }
+
+  /* ---------- Bütique Living : dossier et simulateur de mérite ---------- */
+  const simR = $("#sim-result");
+  if (simR) {
+    const PRICE = 101826, sal = $("#sim-salary"), her = $("#sim-heritage");
+    let touched = false;
+    function sim() {
+      const s = Math.max(0, Number(sal.value) || 0), hv = Math.max(0, Number(her.value) || 0);
+      if (hv >= PRICE) { simR.innerHTML = `<b>0 an.</b> Félicitations : votre mérite est remarquable. π vous reconnaît comme l'un des siens.`; return; }
+      const perYear = s * 12 * 0.1;
+      if (!perYear) { simR.innerHTML = `<b>∞ ans.</b> Avez-vous pensé à vous lever plus tôt ?`; return; }
+      const y = (PRICE - hv) / perYear;
+      simR.innerHTML = `<b>${num.format(Math.ceil(y))} ans</b> de travail acharné, en épargnant 10${NB}% de votre salaire. ` +
+        (y > 30 ? "Avez-vous pensé à vous lever plus tôt ?" : "Vous y êtes presque. Enfin, vos parents.") + ` <small>π, lui, a mis 0${NB}an.</small>`;
+    }
+    [sal, her].forEach((el) => el.addEventListener("input", () => { sim(); if (!touched) { touched = true; unlock("merit"); } }));
+    sim();
+    $("#liv-apply").addEventListener("click", () => {
+      const m = $("#liv-msg");
+      m.textContent = "Dossier reçu. Vous êtes 1 400e sur la liste. Votre profil sera évalué selon votre mérite (et celui de vos garants).";
+      m.hidden = false;
+      unlock("living");
+    });
+  }
 
   /* ---------- Catering : devis ---------- */
   const catSum = $("#cat-sum");
