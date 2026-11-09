@@ -31,16 +31,55 @@
     const styles = ["", "", "", "serif", "outline", "pink", "blue", "mono"];
     const text = mega.textContent.trim();
     mega.textContent = "";
-    [...text].forEach((c) => {
-      const s = document.createElement("span");
-      s.setAttribute("aria-hidden", "true");
-      if (c === " ") { s.className = "space"; mega.appendChild(s); return; }
-      s.className = "ch " + pick(styles);
-      s.textContent = c;
-      s.style.transform = `rotate(${(Math.random() * 12 - 6).toFixed(1)}deg) translateY(${(Math.random() * 14 - 7).toFixed(0)}px)`;
-      mega.appendChild(s);
+    text.split(" ").forEach((w, wi) => {
+      if (wi) {
+        const sp = document.createElement("span");
+        sp.className = "space";
+        sp.setAttribute("aria-hidden", "true");
+        mega.appendChild(sp);
+      }
+      const word = document.createElement("span");
+      word.className = "word";
+      word.setAttribute("aria-hidden", "true");
+      [...w].forEach((c) => {
+        const s = document.createElement("span");
+        s.className = "ch " + pick(styles);
+        s.textContent = c;
+        s.style.transform = `rotate(${(Math.random() * 12 - 6).toFixed(1)}deg) translateY(${(Math.random() * 0.1 - 0.05).toFixed(3)}em)`;
+        word.appendChild(s);
+      });
+      mega.appendChild(word);
     });
   }
+
+  /* ---------- Verrou de défilement (menu, panier) ---------- */
+  const locks = new Set();
+  function lock(key, on) {
+    if (on) locks.add(key); else locks.delete(key);
+    document.body.classList.toggle("locked", locks.size > 0);
+  }
+
+  /* ---------- Menu mobile ---------- */
+  const menu = $("#menu");
+  const menuBtn = $("#menu-open");
+  function openMenu() {
+    menu.hidden = false;
+    menuBtn.setAttribute("aria-expanded", "true");
+    lock("menu", true);
+    $("#menu-close").focus();
+  }
+  function closeMenu(restoreFocus = true) {
+    if (menu.hidden) return;
+    menu.hidden = true;
+    menuBtn.setAttribute("aria-expanded", "false");
+    lock("menu", false);
+    if (restoreFocus) menuBtn.focus();
+  }
+  menuBtn.addEventListener("click", openMenu);
+  $("#menu-close").addEventListener("click", () => closeMenu());
+  menu.addEventListener("click", (e) => { if (e.target.closest("a")) closeMenu(false); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeMenu(); });
+  window.matchMedia("(min-width: 901px)").addEventListener("change", (e) => { if (e.matches) closeMenu(false); });
 
   /* ---------- Marquee : boucle infinie ---------- */
   const marquee = $("#marquee");
@@ -200,12 +239,14 @@
     cartEl.classList.add("open");
     cartEl.setAttribute("aria-hidden", "false");
     scrim.hidden = false;
+    lock("cart", true);
     $("#cart-close").focus();
   }
   function closeCart() {
     cartEl.classList.remove("open");
     cartEl.setAttribute("aria-hidden", "true");
     scrim.hidden = true;
+    lock("cart", false);
     cartBtn.focus();
   }
   cartBtn.addEventListener("click", openCart);

@@ -2,12 +2,14 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#d7ff1e">
   <title>La Bütique — Cöncept-Störe Éphémère-Sédentaire</title>
   <meta name="description" content="La Bütique : le premier cöncept-störe éphémère-sédentaire basé sur le share-care et le rebranding. Ouverture le 31 növembre. Sur liste d'attente.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23d7ff1e'/%3E%3Ctext x='50' y='78' font-size='80' text-anchor='middle' font-family='serif'%3E%CF%80%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Instrument+Serif:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap">
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Instrument+Serif:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/style.css">
 </head>
@@ -49,13 +51,31 @@
   <div class="topbar-actions">
     <a class="btn btn-pink btn-sm" href="#attente">Liste d'attente</a>
     <button class="btn btn-sm cart-btn" id="cart-open" aria-controls="cart">Pänier (<span id="cart-count">0</span>)</button>
+    <button class="btn btn-sm btn-ink menu-btn" id="menu-open" aria-controls="menu" aria-expanded="false">Menü</button>
   </div>
 </header>
+
+<nav class="menu" id="menu" aria-label="Menu" hidden>
+  <div class="menu-head">
+    <span class="logo">LA&nbsp;BÜTIQUE<sup>™</sup></span>
+    <button class="menu-close" id="menu-close" aria-label="Fermer le menu">✕</button>
+  </div>
+  <div class="menu-links">
+    <a href="#concept">Cöncept <span>§01</span></a>
+    <a href="#programme">Prögramme <span>§02</span></a>
+    <a href="#shop">Shöp <span>§03</span></a>
+    <a href="#agenda">Agëndä <span>§04</span></a>
+    <a href="#pi">π <span>§05</span></a>
+    <a href="#infos">Infös <span>§08</span></a>
+  </div>
+  <a class="btn btn-pink btn-lg" href="#attente">Rejoindre la liste d'attente →</a>
+  <p class="menu-foot">Ouverture le 31 növembre · Sur liste d'attente</p>
+</nav>
 
 <div class="live" aria-live="off">
   <span class="live-dot"></span> LIVE ·
   <span><b id="live-waitlist">4 812</b> en liste d'attente</span> ·
-  <span><b id="live-inside">3</b> en boutique</span> ·
+  <span class="live-opt"><b id="live-inside">3</b> en boutique</span> <span class="live-opt">·</span>
   <span><b>0</b> achat finalisé</span>
 </div>
 
@@ -71,6 +91,7 @@
     <a class="btn btn-lg" href="#concept">Cömprendre (déconseillé)</a>
   </div>
 
+  <div class="hero-extras">
   <div class="badge" aria-hidden="true">
     <svg viewBox="0 0 200 200">
       <defs><path id="circle" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs>
@@ -79,9 +100,12 @@
       <text x="100" y="122" text-anchor="middle" class="badge-pi">π</text>
     </svg>
   </div>
-  <span class="sticker s1" aria-hidden="true">NÖUVEAU<br>DEPUIS TOUJÖURS</span>
-  <span class="sticker s2" aria-hidden="true">100 % RE-BRANDÉ</span>
-  <span class="sticker s3" aria-hidden="true">✺ SAISON 0<br>(PERPÉTUELLE)</span>
+  <div class="stickers-wrap">
+    <span class="sticker s1" aria-hidden="true">NÖUVEAU<br>DEPUIS TOUJÖURS</span>
+    <span class="sticker s2" aria-hidden="true">100 % RE-BRANDÉ</span>
+    <span class="sticker s3" aria-hidden="true">✺ SAISON 0<br>(PERPÉTUELLE)</span>
+  </div>
+  </div>
 </section>
 
 <div class="marquee" aria-hidden="true">
