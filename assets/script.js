@@ -141,6 +141,7 @@
     grain: { cls: "v-grain", cap: "Mise au point volontairement libre" },
     lines: { cls: "v-lines", cap: "Plan technique" },
     water: { cls: "v-water", cap: "Suggestion de présentation" },
+    slogan: { cls: "v-slogan", inner: "<span>EMPOW<br>ERMENT</span>", cap: "Message fort" },
   };
 
   const PRODUCTS = [
@@ -152,6 +153,7 @@
     { id: "m3", name: "Matière n°3", cat: "matieres", v: "fabric", price: 560, desc: "Texture. Origine : quelque part entre ici et ailleurs. Usage à co-définir en boutique.", meta: "Vendue au mètre (ou à l'heure)" },
     { id: "lev", name: "Levain d'Intentiön", cat: "comestibles", v: "grain", price: 28, desc: "Fermentation 72 jours. Servi en visualisation guidée. Croûte en option.", meta: "Zéro-cuisine · zéro-miette" },
     { id: "tote", name: "Tote Bag Upcyclé", cat: "objets", v: "question", price: 210, desc: "Upcyclé à partir d'un autre tote bag. Peut contenir. Ne contient pas.", meta: "Pièce unique, en série" },
+    { id: "soro", name: "Tote « Sororité »", cat: "intentions", v: "slogan", price: 290, desc: "Coton bio, slogan engagé. 1 % reversé à notre propre campagne de sensibilisation.", meta: "Taxe rose responsable incluse" },
     { id: "rb", name: "Rëbranding Persönnel", cat: "intentions", v: "pi", price: 1900, desc: "Vous entrez. Vous ressortez. Vous êtes la même personne, avec une meilleure typographie.", meta: "Séance de 3 h 14 avec π" },
     { id: "seat", name: "Assise Partagée", cat: "objets", v: "lines", price: 75, unit: "/ session", desc: "Micro-ownership : non emportable, pleinement habitable pendant 7 minutes.", meta: "Réservation conseillée" },
     { id: "x", name: "Sans titre", cat: "matieres", v: "none", price: 3140, desc: "—", meta: "Réservé au Cercle π", members: true },
@@ -345,6 +347,7 @@
     { d: "21 DÉC", s: "Mardi · 18 h", t: "Vente privée publique", p: "Ouverte à toutes et à tous, en toute intimité.", price: "15 €" },
     { d: "24 DÉC", s: "Vendredi · 14 h – 16 h", t: "Nocturne", p: "Une nocturne en plein jour, pour celles et ceux qui ne sortent pas le soir.", price: "20 €" },
     { d: "30 FÉV", s: "Jeudi · toute la journée", t: "Pop-up dans le pop-up", p: "Une boutique éphémère à l'intérieur de notre boutique éphémère-sédentaire, pour une durée encore plus limitée.", price: "90 €", st: "cancel" },
+    { d: "08 MARS", s: "Mercredi · 8 h 08", t: "Brunch Empowerment", p: "Un brunch réservé aux femmes dirigeantes, ouvert par une keynote de π, qui prendra la parole en premier pour ne pas influencer les échanges.", price: "88 € (après remise de 8 %)", st: "full" },
     { d: "JEUDIS", s: "Hebdomadaire · 19 h", t: "Swap de ressentis", p: "Apportez une émotion dont vous ne vous servez plus. Repartez avec celle de quelqu'un d'autre. Néo-troc 100 % circulaire.", price: "12 €" },
     { d: "DIMANCHES", s: "Square voisin · 12 h 30", t: "Food-sharing nomade", p: "Chacun apporte son repas et le consomme assis sur l'herbe, en communauté. Couverture pre-loved fournie (caution 40 €).", price: "18 €", st: "wait" },
   ];

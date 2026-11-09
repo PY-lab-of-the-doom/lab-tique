@@ -334,6 +334,37 @@ mark.m-blue { background: var(--blue); color: #fff; }
 .pi-stats dt { font-size: .7rem; text-transform: uppercase; }
 .pi-stats dd { margin: 4px 0 0; font: 1.8rem var(--f-display); }
 
+/* ---------- Valeurs (Féminisme™) ---------- */
+.section-rose { background: #ffc9e4; }
+.fem-band {
+  margin: 0 calc(-1 * var(--gutter)) 40px; padding: 14px var(--gutter);
+  background: var(--ink); color: var(--pink);
+  font: clamp(1.1rem, 3.4vw, 2.4rem)/1.1 var(--f-display); text-align: center;
+  transform: rotate(-1deg); border-block: var(--line);
+}
+.vals { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: var(--line); background: #fff; box-shadow: var(--shadow); }
+.val { padding: 24px 20px; border: 1.5px solid var(--ink); display: flex; flex-direction: column; gap: 10px; }
+.val-tag { align-self: flex-start; font-size: .68rem; font-weight: 700; text-transform: uppercase; background: var(--pink); border: 2px solid var(--ink); padding: 2px 8px; transform: rotate(-2deg); }
+.val h3 { margin: 0; font: 1.3rem/1.05 var(--f-display); text-transform: uppercase; }
+.val p { margin: 0; }
+.val-cta { background: var(--acid); }
+.val-cta .btn { align-self: flex-start; margin-top: auto; }
+.fem-quote {
+  margin: 48px 0 32px; padding: 24px; max-width: 760px;
+  background: var(--pink); border: var(--line); box-shadow: 8px 8px 0 var(--ink);
+  font: italic clamp(1.5rem, 3.4vw, 2.4rem)/1.15 var(--f-serif); transform: rotate(-1deg);
+}
+.fem-quote cite { display: block; margin-top: 12px; font: 700 .8rem var(--f-mono); font-style: normal; text-transform: uppercase; }
+.fem-stats { max-width: 760px; }
+.fem-note { font-size: .75rem; margin: 10px 0 0; }
+
+@media (max-width: 1100px) { .vals { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .vals { grid-template-columns: minmax(0, 1fr); } }
+
+/* Visuel « slogan » */
+.v-slogan { background: var(--pink); display: grid; place-items: center; }
+.v-slogan span { font: 1.9rem/0.9 var(--f-display); font-size: 21cqw; color: var(--ink); transform: rotate(-8deg); text-align: center; }
+
 /* ---------- Quotes ---------- */
 .quotes { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 28px; }
 .quote { margin: 0; padding: 24px; border: var(--line); box-shadow: var(--shadow); background: #fff; }
@@ -549,6 +580,12 @@ mark.m-blue { background: var(--blue); color: #fff; }
   .pi-bio blockquote { font-size: 1.35rem; padding: 18px; box-shadow: 6px 6px 0 var(--acid); }
   .pi-stats { grid-template-columns: 1fr 1fr; }
   .pi-stats dd { font-size: 1.45rem; }
+
+  /* Valeurs */
+  .fem-band { margin: 0 -16px 28px; padding: 12px 16px; font-size: 1rem; }
+  .val { padding: 20px 16px; }
+  .val h3 { font-size: 1.15rem; }
+  .fem-quote { margin: 36px 0 24px; padding: 18px; font-size: 1.35rem; box-shadow: 6px 6px 0 var(--ink); }
 
   /* Presse */
   .quotes { gap: 20px; }
