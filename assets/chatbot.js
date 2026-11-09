@@ -56,6 +56,11 @@
       "Vous êtes actuellement n° 314 dans la file d'attente de notre service client. Temps d'attente estimé : éphémère-sédentaire.",
       "Un humain ? Nous avons mieux : une présence augmentée. C'est moi.",
     ],
+    catering: [
+      "Notre catering Edo-Terroir est une expérience : terrine de sushi au foie de veau, tripes en sashimi, blanquette-ramen. Les portions sont pensées pour la contemplation.",
+      "Pour 40 convives, comptez environ 8 000 €. Chacun repartira avec 12 g de souvenirs et une vraie faim de culture.",
+      "Tout est fait maison, dans notre cuisine centrale partenaire. Je ne peux pas vous en dire plus : c'est un secret de chef (et de congélateur).",
+    ],
     kofi: [
       "Vous souhaitez soutenir π ? Offrez-lui un décaféiné matcha éco-responsable, gender-friendly et sourcé là-bas, servi tiède pour ne brusquer personne.",
       "Votre générosité sera transformée en impact positif, après déduction des frais de fonctionnement (97 %). Le reste améliorera le monde.",
@@ -112,6 +117,7 @@
   const INTENTS = [
     ["thanks", /\b(merci|thx|thanks)\b/],
     ["bye", /\b(au revoir|bye|ciao|bonne (journee|soiree))\b/],
+    ["catering", /catering|traiteur|buffet|cocktail|sushi|sashimi|tripe|terrine|repas|manger|faim|menu|cuisine|chef|plat\b/],
     ["kofi", /ko.?fi|soutenir|soutien|\bdon\b|donation|\bcafe\b|\btip\b|pourboire|aider|mecen|financer/],
     ["contact", /contact|joindre|linktree|insta|reseau|mail|telephone|numero|ecrire/],
     ["human", /\b(humain|conseill|vrai(e)? personne|agent|operat|quelqu.un|service client)/],

@@ -43,6 +43,7 @@
     "cowaiting": ["Co-waiter d'élite", 47],
     "code": ["Initié·e au code", 31],
     "selfie": ["Visage aligné", 14],
+    "catering": ["Cuisine centrale démasquée", 33],
   };
   const PI_TOTAL = 7, PI_PTS = 14;
 
@@ -91,6 +92,7 @@
     const a = e.target.closest("a[href]");
     if (!a) return;
     if (a.href.includes("ko-fi.com")) unlock("kofi");
+    else if (a.href.includes("picard.fr")) unlock("catering");
     else if (a.href.includes("linktr.ee")) unlock("linktree");
   });
 
@@ -468,6 +470,34 @@
     taps = taps.filter((t) => now - t < 900); taps.push(now);
     if (taps.length >= 3) { taps = []; e.preventDefault(); runCode(); }
   }));
+
+  /* ---------- Catering : devis ---------- */
+  const catSum = $("#cat-sum");
+  if (catSum) {
+    const f = $("#cat-formula"), g = $("#cat-guests");
+    const row = (k, v, cls = "") => `<div class="${cls}"><dt>${k}</dt><dd>${v}</dd></div>`;
+    function quote() {
+      const opt = f.selectedOptions[0], unit = Number(opt.value), grams = Number(opt.dataset.g);
+      const n = Math.max(1, Math.min(999, Math.round(Number(g.value) || 1)));
+      const base = unit * n, dressage = base * 0.22, contemplation = 15 * n, chef = 314, zen = (base + dressage) * 0.08;
+      const total = base + dressage + contemplation + chef + zen;
+      catSum.innerHTML = row(`${n} × ${eur.format(unit)}`, eur.format(base))
+        + row("Frais de dressage (22 %)", eur.format(dressage))
+        + row("Frais de contemplation", eur.format(contemplation))
+        + row("Déplacement du chef (en trottinette)", eur.format(chef))
+        + row("Taxe zen (8 %)", eur.format(zen))
+        + row("Total", eur.format(total), "total")
+        + row("Quantité servie", `${grams}${NB}g par personne, soit ${eur.format(total / (grams * n) * 1000)} le kilo`, "kilo");
+    }
+    f.addEventListener("change", quote); g.addEventListener("input", quote); quote();
+    const CAT_MSGS = [
+      "Devis en cours de dressage. Il vous sera présenté sur une ardoise, à la pince.",
+      "Le chef a bien reçu votre demande. Il la laisse reposer 72 heures, comme un levain.",
+      "Votre réception est confirmée sous réserve de disponibilité de notre cuisine centrale partenaire.",
+    ];
+    let ci = 0;
+    $("#cat-order").addEventListener("click", () => notify(CAT_MSGS[ci++ % CAT_MSGS.length], 0, "Bütique Catering"));
+  }
 
   /* ---------- Bücoin ---------- */
   const priceEl = $("#bu-price");

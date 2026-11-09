@@ -295,6 +295,51 @@ mark.m-blue { background: var(--blue); color: #fff; }
 .v-water { background: linear-gradient(180deg, #f2f6ff 0 30%, #cfe0ff 30% 100%); }
 .v-water::after { content: ""; position: absolute; left: 34%; right: 34%; top: 18%; bottom: 14%; border: 3px solid var(--ink); border-top: none; background: rgba(255,255,255,.45); }
 
+/* ---------- Catering ---------- */
+.section-catering { background: #fff4e6; }
+.cat-top { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 32px; align-items: center; margin-bottom: 40px; }
+.cat-plate { margin: 0; text-align: center; }
+.plate {
+  position: relative; width: min(100%, 340px); aspect-ratio: 1; margin: 0 auto; border-radius: 50%;
+  background: radial-gradient(circle, #fff 0 52%, #f4f1ea 53% 60%, #fff 61%); border: var(--line); box-shadow: 10px 10px 0 var(--ink);
+}
+.bite { position: absolute; left: 54%; top: 47%; width: 9px; height: 6px; border-radius: 40%; background: #7a4a2a; box-shadow: 2px 0 0 #2d6b3a; }
+.cat-plate figcaption { margin-top: 18px; font-size: .78rem; font-weight: 700; text-transform: uppercase; }
+.cat-plate .arrow { color: var(--pink); font-size: 1.2rem; }
+.cat-chef { background: #fff; border: var(--line); box-shadow: var(--shadow); padding: 22px; }
+.cat-chef p { margin: 6px 0 14px; }
+.cat-tags { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.cat-tags li { font-size: .72rem; font-weight: 700; text-transform: uppercase; border: 2px solid var(--ink); border-radius: 999px; padding: 4px 10px; background: var(--acid); }
+.cat-tags li:nth-child(even) { background: var(--pink); }
+.cat-menu { background: #fff; border: var(--line); box-shadow: var(--shadow); padding: clamp(20px, 3vw, 36px); margin-bottom: 40px; columns: 2 340px; column-gap: 40px; }
+.cat-title { margin: 0 0 18px; font: clamp(1.6rem, 3.4vw, 2.4rem)/1 var(--f-display); text-transform: uppercase; column-span: all; }
+.cat-title small { font: 700 .75rem var(--f-mono); background: var(--ink); color: var(--paper); padding: 2px 8px; vertical-align: middle; }
+.cat-group { break-inside: avoid; margin-bottom: 24px; }
+.cat-group h4 { margin: 0 0 8px; font: italic 1.5rem var(--f-serif); border-bottom: var(--line); padding-bottom: 4px; }
+.cat-group ul { list-style: none; margin: 0; padding: 0; }
+.cat-group li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 14px; padding: 10px 0; border-bottom: 1px dashed #999; }
+.cat-dish strong { display: block; font: .95rem/1.15 var(--f-display); text-transform: uppercase; }
+.cat-dish span { display: block; font-size: .8rem; margin-top: 3px; }
+.cat-dish em { display: inline-block; margin-top: 4px; font-family: var(--f-mono); font-size: .68rem; font-style: normal; font-weight: 700; text-transform: uppercase; background: var(--acid); padding: 1px 6px; }
+.cat-group b { font: 1.1rem var(--f-display); white-space: nowrap; }
+.cat-quote { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: 32px; align-items: start; }
+.cat-form { background: var(--ink); color: var(--paper); padding: clamp(20px, 3vw, 32px); border: var(--line); box-shadow: 10px 10px 0 var(--pink); display: grid; gap: 16px; }
+.cat-form .cat-title { color: var(--acid); }
+.cat-form .field input, .cat-form .field select { background: var(--paper); }
+.cat-sum { margin: 0; display: grid; gap: 4px; font-size: .85rem; }
+.cat-sum div { display: flex; justify-content: space-between; gap: 12px; }
+.cat-sum dd { margin: 0; text-align: right; }
+.cat-sum .total { font: 1.4rem var(--f-display); color: var(--acid); border-top: 2px solid var(--paper); padding-top: 8px; margin-top: 6px; }
+.cat-sum .kilo { font-size: .75rem; color: var(--pink); font-weight: 700; }
+.cat-form .fem-note { color: var(--paper); }
+.cat-promises { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.cat-promises li { position: relative; padding: 12px 14px 12px 38px; background: #fff; border: 2px solid var(--ink); font-size: .88rem; }
+.cat-promises li::before { content: "✓"; position: absolute; left: 14px; top: 12px; font-weight: 700; color: #0a8f4f; }
+/* Le lien caché : il ne ressemble pas à un lien */
+.cat-secret { color: inherit; text-decoration: none; cursor: text; }
+.cat-secret:hover { cursor: text; }
+.cat-secret:focus-visible { outline: 3px dashed var(--blue); }
+
 /* ---------- Agenda ---------- */
 .agenda { list-style: none; margin: 0; padding: 0; border-top: var(--line); }
 .event {
@@ -1143,6 +1188,14 @@ body.shiny .h2, body.shiny .logo, body.shiny .mega { animation: sparkle .35s ste
   .cart { padding: 16px 16px calc(20px + var(--nf) + env(safe-area-inset-bottom)); border-left: none; }
   .cart-head h2 { font-size: 1.5rem; }
   .cart-items .ci-remove { padding: 8px 0 8px 8px; }
+
+  /* Catering */
+  .cat-top, .cat-quote { grid-template-columns: minmax(0, 1fr); gap: 22px; }
+  .plate { width: min(100%, 240px); box-shadow: 6px 6px 0 var(--ink); }
+  .cat-chef, .cat-menu { padding: 16px; box-shadow: 5px 5px 0 var(--ink); }
+  .cat-form { padding: 18px 16px; box-shadow: 6px 6px 0 var(--pink); }
+  .cat-form .btn { width: 100%; }
+  .cat-sum div { flex-wrap: wrap; }
 
   /* Club, écosystème, méditation */
   .cw-head { grid-template-columns: minmax(0, 1fr); gap: 16px; }
