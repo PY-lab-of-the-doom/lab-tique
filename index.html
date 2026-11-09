@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>La Bütique — Cöncept-Störe Éphémère-Sédentaire</title>
+  <meta name="description" content="La Bütique : le premier cöncept-störe éphémère-sédentaire basé sur le share-care et le rebranding. Ouverture le 31 növembre. Sur liste d'attente.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23d7ff1e'/%3E%3Ctext x='50' y='78' font-size='80' text-anchor='middle' font-family='serif'%3E%CF%80%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Instrument+Serif:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<a class="skip" href="#main">Aller au cöntenu</a>
+
+<!-- ===== Cookies ===== -->
+<div class="cookie" id="cookie" role="dialog" aria-labelledby="cookie-title" hidden>
+  <p class="cookie-tag">Ëxpérience Cöokies™</p>
+  <h2 id="cookie-title">Nous n'utilisons pas de cookies.</h2>
+  <p>Nous utilisons des <em>biscuits relationnels</em>, façonnés à la main par un artisan du 11e et déposés avec bienveillance dans votre navigateur. En poursuivant votre navigation, vous acceptez que votre navigation soit une poursuite.</p>
+  <div class="cookie-prefs" id="cookie-prefs" hidden>
+    <label class="toggle"><input type="checkbox" checked disabled> Strictement nécessaires (à notre narratif)</label>
+    <label class="toggle"><input type="checkbox"> Mesure d'aura</label>
+    <label class="toggle"><input type="checkbox"> Ciblage émotionnel de précision</label>
+    <label class="toggle"><input type="checkbox" checked disabled> Cookies pre-loved (déjà acceptés par un autre visiteur)</label>
+    <label class="toggle"><input type="checkbox"> Sans gluten, sans tracking, sans garantie</label>
+  </div>
+  <div class="cookie-actions">
+    <button class="btn btn-ink" data-cookie="all">Tout accepter</button>
+    <button class="btn btn-acid" data-cookie="conscious">Tout accepter, en conscience</button>
+    <button class="btn" data-cookie="custom" id="cookie-custom">Persönnaliser</button>
+  </div>
+  <button class="cookie-refuse" data-cookie="refuse">Refuser</button>
+</div>
+
+<!-- ===== Header ===== -->
+<header class="topbar">
+  <a class="logo" href="#top">LA&nbsp;BÜTIQUE<sup>™</sup></a>
+  <nav class="nav" aria-label="Navigation principale">
+    <a href="#concept">Cöncept</a>
+    <a href="#programme">Prögramme</a>
+    <a href="#shop">Shöp</a>
+    <a href="#agenda">Agëndä</a>
+    <a href="#pi">π</a>
+    <a href="#infos">Infös</a>
+  </nav>
+  <div class="topbar-actions">
+    <a class="btn btn-pink btn-sm" href="#attente">Liste d'attente</a>
+    <button class="btn btn-sm cart-btn" id="cart-open" aria-controls="cart">Pänier (<span id="cart-count">0</span>)</button>
+  </div>
+</header>
+
+<div class="live" aria-live="off">
+  <span class="live-dot"></span> LIVE ·
+  <span><b id="live-waitlist">4 812</b> en liste d'attente</span> ·
+  <span><b id="live-inside">3</b> en boutique</span> ·
+  <span><b>0</b> achat finalisé</span>
+</div>
+
+<main id="main">
+
+<!-- ===== Hero ===== -->
+<section class="hero" id="top">
+  <p class="kicker">Ouverture le 31 növembre · Haut-Marais, Paris 3e · 14 m² (400 m² ressentis)</p>
+  <h1 class="mega" data-split aria-label="La Bütique">LA BÜTIQUE</h1>
+  <p class="hero-lead">Le premier cöncept-störe <mark>éphémère-sédentaire</mark> basé sur le <mark class="m-pink">share-care</mark> et le <mark class="m-blue">rebranding</mark>. Ni magasin, ni café, ni galerie, ni salle de concert. Un peu tout ça. Surtout rien de tout ça.</p>
+  <div class="hero-cta">
+    <a class="btn btn-pink btn-lg" href="#attente">Rejoindre la liste d'attente →</a>
+    <a class="btn btn-lg" href="#concept">Cömprendre (déconseillé)</a>
+  </div>
+
+  <div class="badge" aria-hidden="true">
+    <svg viewBox="0 0 200 200">
+      <defs><path id="circle" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs>
+      <circle cx="100" cy="100" r="99" fill="#d7ff1e" stroke="#0b0b0b" stroke-width="3"/>
+      <text><textPath href="#circle">ÉPHÉMÈRE · SÉDENTAIRE · ÉPHÉMÈRE · SÉDENTAIRE · </textPath></text>
+      <text x="100" y="122" text-anchor="middle" class="badge-pi">π</text>
+    </svg>
+  </div>
+  <span class="sticker s1" aria-hidden="true">NÖUVEAU<br>DEPUIS TOUJÖURS</span>
+  <span class="sticker s2" aria-hidden="true">100 % RE-BRANDÉ</span>
+  <span class="sticker s3" aria-hidden="true">✺ SAISON 0<br>(PERPÉTUELLE)</span>
+</section>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track" id="marquee">
+    <span>ÖUVERTURE LE 31 NÖVEMBRE</span><span>✺</span><span>ÉPHÉMÈRE-SÉDENTAIRE</span><span>✺</span><span>SHARE-CARE</span><span>✺</span><span>REBRANDING</span><span>✺</span><span>CÖNCERT</span><span>✺</span><span>ALIMENTATIÖN</span><span>✺</span><span>SECÖNDE MAIN</span><span>✺</span><span>ËVENTS</span><span>✺</span><span>LISTE D'ATTENTE OUVERTE (COMPLÈTE)</span><span>✺</span>
+  </div>
+</div>
+
+<!-- ===== Concept ===== -->
+<section class="section" id="concept">
+  <header class="section-head">
+    <span class="section-num">§01</span>
+    <h2 class="h2">Le Cöncept<sup>™</sup></h2>
+  </header>
+  <p class="lead">La Bütique n'est pas un lieu. C'est une <strong>plateforme physique de co-expérience retail</strong>, pensée comme un safe-space transactionnel où l'on ne vient pas pour acheter, mais pour se laisser acheter par l'instant.</p>
+
+  <div class="pillars">
+    <article class="pillar p-acid">
+      <span class="pillar-num">01</span>
+      <h3>Éphémère&#8209;Sédentaire</h3>
+      <p>Nous sommes un pop-up permanent. Nous ouvrons pour une durée limitée, illimitée. Le bail est signé pour neuf ans, mais l'intention, elle, se renouvelle chaque matin. C'est ce que nous appelons le <em>long-term ephemeral</em>.</p>
+      <p class="pillar-foot">Bail 3-6-9 · Mood 24 h</p>
+    </article>
+    <article class="pillar p-pink">
+      <span class="pillar-num">02</span>
+      <h3>Share&#8209;Care</h3>
+      <p>Vous prêtez un objet à une amie. Elle vous le rend. Avant La Bütique, ce geste n'avait pas de nom. Aujourd'hui, c'est du <em>share-care</em>, et c'est sur abonnement. Nous ne possédons rien : nous sécurisons le flux de la bienveillance matérielle.</p>
+      <p class="pillar-foot">Dès 120 € / mois</p>
+    </article>
+    <article class="pillar p-blue">
+      <span class="pillar-num">03</span>
+      <h3>Rebranding</h3>
+      <p>Rien n'est nouveau. Tout est neuf. Notre équipe de <em>brand-shifters</em> réencode des pratiques ancestrales pour le XXI<sup>e</sup> siècle. Faire la queue devient du <em>co-waiting</em>. Un banc devient une <em>assise partagée</em>. Vos clients deviennent une <em>communauté</em>.</p>
+      <p class="pillar-foot">Process breveté (en cours)</p>
+    </article>
+  </div>
+</section>
+
+<div class="nots" aria-label="Ce que nous ne sommes pas">
+  <span>PAS UNE BOUTIQUE.</span>
+  <span class="alt">PAS UN CAFÉ.</span>
+  <span>PAS UNE GALERIE.</span>
+  <span class="alt">PAS UN CONCEPT.</span>
+  <span class="big">UN MÉTA&#8209;CÖNCEPT.</span>
+</div>
+
+<!-- ===== Programme ===== -->
+<section class="section" id="programme">
+  <header class="section-head">
+    <span class="section-num">§02</span>
+    <h2 class="h2">Au Prögramme</h2>
+  </header>
+  <p class="lead">Quatre verticales. Zéro silo. Une seule expérience, déclinée en <em>touchpoints</em> sensoriels <em>fully-integrated</em>.</p>
+
+  <div class="prog">
+    <article class="prog-item">
+      <div class="prog-tag">01 — Cöncert</div>
+      <p>Une programmation live au format <strong>acoustic-silent</strong> : les artistes jouent, mais intérieurement. Le public est invité à pratiquer l'écoute active de ce qui n'est pas joué. Bouchons d'oreilles pre-loved fournis (supplément 8 €).</p>
+    </article>
+    <article class="prog-item">
+      <div class="prog-tag">02 — Alimentatiön</div>
+      <p>Une offre food <strong>zéro-cuisine</strong> : produits bruts, non transformés, non préparés, parfois non livrés. Notre <em>hydratation consciente</em> est servie en <strong>glass-to-glass</strong> : vous rapportez le verre, nous vous le revendons. Le dimanche, <em>food-sharing nomade</em> : chacun apporte son repas et le mange sur l'herbe du square voisin.</p>
+    </article>
+    <article class="prog-item">
+      <div class="prog-tag">03 — Secönde Main</div>
+      <p>Notre corner <strong>pre-loved curated</strong> sélectionne avec exigence des pièces ayant déjà eu une vie, souvent la nôtre. Le vide-grenier, enfin débarrassé de son grenier. Réparations proposées en <em>upcycling assisté</em> : vous apportez l'objet cassé, la colle et l'aiguille, nous apportons le regard.</p>
+    </article>
+    <article class="prog-item">
+      <div class="prog-tag">04 — Ëvents</div>
+      <p>Des moments. Des activations. Des <em>drops</em> (ruptures de stock programmées). Des soirées de <strong>silent networking</strong> où l'on se tient côte à côte sans jamais s'adresser la parole, comme dans le métro, mais à 35 € l'entrée.</p>
+    </article>
+  </div>
+</section>
+
+<!-- ===== Shop ===== -->
+<section class="section section-dark" id="shop">
+  <header class="section-head">
+    <span class="section-num">§03</span>
+    <h2 class="h2">La Cöllectiön</h2>
+  </header>
+  <p class="lead">Saison 0 (perpétuelle). Les pièces ci-dessous sont disponibles, indisponibles, ou les deux. Visuels non contractuels. Livraison en <strong>click &amp; walk</strong> : vous venez, vous repartez, le reste vous appartient.</p>
+
+  <div class="filters" role="group" aria-label="Filtrer la collection" id="filters"></div>
+  <div class="products" id="products"></div>
+</section>
+
+<!-- ===== Agenda ===== -->
+<section class="section" id="agenda">
+  <header class="section-head">
+    <span class="section-num">§04</span>
+    <h2 class="h2">Agëndä</h2>
+  </header>
+  <p class="lead">Programmation saisonnière curatée par π. Toutes les dates sont fermes, sauf modification. Arrivée conseillée 45 minutes avant le début de votre <em>co-waiting</em>.</p>
+  <ol class="agenda" id="events"></ol>
+</section>
+
+<!-- ===== Pi ===== -->
+<section class="section section-pink" id="pi">
+  <header class="section-head">
+    <span class="section-num">§05</span>
+    <h2 class="h2">Le Föndateur</h2>
+  </header>
+  <div class="pi">
+    <div class="pi-portrait" aria-hidden="true">
+      <span>π</span>
+    </div>
+    <div class="pi-bio">
+      <h3>π <small>— Fondateur, coach en maïeutique</small></h3>
+      <p>π ne se présente pas. π vous pose des questions, puis vous laisse y répondre seul·e, à 314 € la séance.</p>
+      <p>Formé à la maïeutique socratique en autodidacte, π a accompagné plus de 3,14159 entrepreneurs dans l'accouchement de leur vision. Il ne donne jamais de réponse : il aide les réponses à se donner elles-mêmes.</p>
+      <p>Avant La Bütique, π a été <em>Head of Questions</em> dans une start-up qu'il préfère ne pas nommer, puis <em>Chief Uncertainty Officer</em> en freelance. Il se définit aujourd'hui comme irrationnel, transcendant et infini.</p>
+      <p>Lorsqu'on lui demande ce que vend La Bütique, π répond : « Et vous, qu'êtes-vous venu·e chercher ? » La séance est alors facturée.</p>
+      <blockquote>« Je ne vends rien. J'accompagne le besoin d'acheter jusqu'à sa naissance. »<cite>— π</cite></blockquote>
+      <dl class="pi-stats">
+        <div><dt>Séance</dt><dd>314 €</dd></div>
+        <div><dt>Durée</dt><dd>3 h 14</dd></div>
+        <div><dt>Questions posées</dt><dd>∞</dd></div>
+        <div><dt>Réponses données</dt><dd>0</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Presse ===== -->
+<section class="section" id="presse">
+  <header class="section-head">
+    <span class="section-num">§06</span>
+    <h2 class="h2">Ïls en parlent</h2>
+  </header>
+  <div class="quotes">
+    <figure class="quote q1"><blockquote>« On n'a pas compris. C'est donc forcément important. »</blockquote><figcaption>Ëpoque Magazine</figcaption></figure>
+    <figure class="quote q2"><blockquote>« Je suis reparti les mains vides, et j'ai payé. Bouleversant. »</blockquote><figcaption>Le Courrier du Concept</figcaption></figure>
+    <figure class="quote q3"><blockquote>« Le futur du retail ressemble étrangement à son passé, en plus cher. »</blockquote><figcaption>NÉØ Hebdo</figcaption></figure>
+    <figure class="quote q4"><blockquote>« La file d'attente la plus inclusive de Paris. »</blockquote><figcaption>Urbaine &amp; Brute</figcaption></figure>
+    <figure class="quote q5"><blockquote>« ★★★★★ Je n'ai pas trouvé l'entrée. »</blockquote><figcaption>Maëlle, 34 ans, directrice artistique · avis vérifié</figcaption></figure>
+    <figure class="quote q6"><blockquote>« Mon fils m'a demandé ce que c'était. Je lui ai répondu : La Bütique. Il a compris. »</blockquote><figcaption>Jean-Baptiste, membre de la communauté (2 visites)</figcaption></figure>
+  </div>
+</section>
+
+<!-- ===== Waitlist ===== -->
+<section class="section section-acid" id="attente">
+  <header class="section-head">
+    <span class="section-num">§07</span>
+    <h2 class="h2">Liste d'Attente</h2>
+  </header>
+  <p class="lead">L'accès à La Bütique est libre, sur liste d'attente. Les places sont attribuées par un algorithme propriétaire qui croise votre date d'inscription, votre alignement et la météo.</p>
+
+  <form class="waitlist" id="waitlist" novalidate>
+    <div class="field">
+      <label for="wl-name">Prénom (ou nom de scène)</label>
+      <input id="wl-name" name="name" required autocomplete="given-name">
+    </div>
+    <div class="field">
+      <label for="wl-mail">E-mail perso-pro</label>
+      <input id="wl-mail" name="mail" type="email" required autocomplete="email">
+    </div>
+    <div class="field field-wide">
+      <label for="wl-intent">Votre intentiön</label>
+      <textarea id="wl-intent" name="intent" rows="3" placeholder="Décrivez ce que vous ne venez pas chercher."></textarea>
+    </div>
+    <div class="field">
+      <label for="wl-rel">Votre rapport à l'achat</label>
+      <select id="wl-rel" name="rel">
+        <option>Conscient</option>
+        <option>Post-conscient</option>
+        <option>Je préfère ne pas consommer (mais je paierai)</option>
+        <option>Je ne sais pas (idéal)</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="wl-budget">Combien êtes-vous prêt·e à dépenser sans savoir pour quoi ?</label>
+      <input id="wl-budget" name="budget" type="range" min="0" max="5000" step="10" value="420">
+      <output id="wl-budget-out" for="wl-budget">420 € — Alignement correct</output>
+    </div>
+    <label class="check field-wide"><input type="checkbox" name="certify" required> Je certifie ne pas savoir ce que je viens chercher.</label>
+    <label class="check field-wide"><input type="checkbox" name="pi"> J'accepte d'être recontacté·e par π pour une séance de maïeutique découverte (314 €).</label>
+    <p class="form-error field-wide" id="wl-error" role="alert"></p>
+    <button class="btn btn-ink btn-lg field-wide" type="submit">Candidater à l'attente →</button>
+  </form>
+
+  <div class="waitlist-result" id="wl-result" hidden tabindex="-1">
+    <p class="wl-kicker">Candidature reçue.</p>
+    <p class="wl-big">N°&nbsp;<span id="wl-pos">4 813</span></p>
+    <p>Merci, <strong id="wl-who"></strong>. Vous êtes inscrit·e sur la liste d'attente donnant accès à la liste d'attente. Votre position évolue en temps réel selon votre alignement.</p>
+    <p>Merci de ne pas nous recontacter : nous vous recontacterons lorsque vous serez prêt·e.</p>
+  </div>
+</section>
+
+<!-- ===== Infos ===== -->
+<section class="section" id="infos">
+  <header class="section-head">
+    <span class="section-num">§08</span>
+    <h2 class="h2">Infös Pratiques</h2>
+  </header>
+  <dl class="infos">
+    <div><dt>Adresse</dt><dd>Haut-Marais, Paris 3e. L'adresse exacte est communiquée oralement, à l'issue de votre co-waiting.</dd></div>
+    <div><dt>Horaires</dt><dd>Slow-retail : du mardi au samedi, en dehors des heures d'ouverture. Le dimanche, <em>closed-store experience</em>.</dd></div>
+    <div><dt>Accès</dt><dd>Click &amp; walk. Entrée par la porte de côté (l'autre).</dd></div>
+    <div><dt>Paiement</dt><dd>CB, <em>warm-cash</em>, intention. Chèques-cadeaux La Bütique acceptés (en rupture).</dd></div>
+    <div><dt>Wi-Fi</dt><dd><em>Digital detox premium</em> : zone blanche certifiée. Accès au réseau en option (9 € / 15 min).</dd></div>
+    <div><dt>Vestiaire</dt><dd><em>Consigne émotionnelle</em> : déposez vos attentes à l'entrée, elles vous seront rendues à la sortie (4 €).</dd></div>
+    <div><dt>Dress code</dt><dd>Aucun. Nous verrons.</dd></div>
+    <div><dt>Fidélité</dt><dd>Programme d'engagement relationnel longue durée : au bout de dix visites, vous devenez <em>ambassadeur·rice</em> et payez l'entrée.</dd></div>
+  </dl>
+</section>
+
+</main>
+
+<footer class="footer">
+  <p class="footer-logo">LA BÜTIQUE</p>
+  <p>© 2026 – ∞ La Bütique SAS au capital de 3,14 €. Tous droits réservés, tous devoirs partagés.</p>
+  <p class="footer-links">
+    <span>Mentions légales (sur rendez-vous)</span> ·
+    <span>CGV — Conditions Générales de Vibration</span> ·
+    <span>Recrutement : stagiaire Head of Vibe (non rémunéré, nourri d'intentions)</span>
+  </p>
+</footer>
+
+<!-- ===== Cart ===== -->
+<aside class="cart" id="cart" aria-label="Pänier" aria-hidden="true">
+  <div class="cart-head">
+    <h2>Vötre Pänier</h2>
+    <button class="cart-close" id="cart-close" aria-label="Fermer le panier">✕</button>
+  </div>
+  <ul class="cart-items" id="cart-items"></ul>
+  <div class="cart-sum" id="cart-sum"></div>
+  <p class="cart-refusal" id="cart-refusal" role="alert" hidden></p>
+  <button class="btn btn-pink btn-lg cart-checkout" id="checkout">Finaliser l'expérience d'achat →</button>
+  <p class="cart-note">Livraison click &amp; walk. Retours acceptés sous 14 jours, sous forme de ressenti.</p>
+</aside>
+<div class="scrim" id="scrim" hidden></div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="assets/script.js"></script>
+</body>
+</html>
