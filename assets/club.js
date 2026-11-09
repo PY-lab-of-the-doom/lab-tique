@@ -494,6 +494,32 @@
     document.addEventListener("visibilitychange", () => (document.hidden ? stop() : play()));
   }
 
+  /* ---------- Mini-Bütique : conseil parental tapé à la machine ---------- */
+  const conseil = $("#conseil");
+  if (conseil) {
+    const lines = $$(".cs-line", conseil);
+    const fill = () => lines.forEach((l) => { l.textContent = l.dataset.text; });
+    if (still.matches) fill();
+    else {
+      let started = false;
+      new IntersectionObserver(([en], obs) => {
+        if (!en.isIntersecting || started) return;
+        started = true; obs.disconnect();
+        let li = 0, ci = 0;
+        conseil.classList.add("typing");
+        const step = () => {
+          if (li >= lines.length) { conseil.classList.remove("typing"); conseil.classList.add("typed"); return; }
+          const l = lines[li], t = l.dataset.text;
+          l.classList.add("cur");
+          l.textContent = t.slice(0, ++ci);
+          if (ci >= t.length) { l.classList.remove("cur"); li++; ci = 0; setTimeout(step, 420); }
+          else setTimeout(step, t[ci - 1] === " " ? 12 : 22);
+        };
+        step();
+      }, { threshold: 0.4 }).observe(conseil);
+    }
+  }
+
   /* ---------- Mini-Bütique : fausse urgence ---------- */
   const mt = $("#mini-timer");
   if (mt) {
