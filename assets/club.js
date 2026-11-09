@@ -47,6 +47,7 @@
     "mini-add": ["Parentalité premium", 21],
     "living": ["Locataire méritant·e", 33],
     "merit": ["Méritocrate", 14],
+    "instagram": ["Abonné·e conscient·e", 21],
   };
   const PI_TOTAL = 7, PI_PTS = 14;
 
@@ -96,6 +97,7 @@
     if (!a) return;
     if (a.href.includes("ko-fi.com")) unlock("kofi");
     else if (a.href.includes("picard.fr")) unlock("catering");
+    else if (a.href.includes("instagram.com")) unlock("instagram");
     else if (a.href.includes("linktr.ee")) unlock("linktree");
   });
 

@@ -1069,6 +1069,23 @@ body.shiny .h2, body.shiny .logo, body.shiny .mega { animation: sparkle .35s ste
 .med-time { margin: 0; font: clamp(3rem, 8vw, 5.5rem)/1 var(--f-display); }
 .med-hz { margin: 0; font-weight: 700; min-height: 1.2em; }
 
+/* ---------- Instagram ---------- */
+.insta {
+  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 32px; align-items: center;
+  margin-top: 32px; padding: clamp(20px, 3vw, 36px);
+  background: linear-gradient(135deg, #ffe3ec, #fff4e6 60%, #e9e3f7); border: var(--line); box-shadow: 10px 10px 0 var(--ink);
+}
+.insta-title { margin: 4px 0 6px; font: clamp(1.8rem, 4vw, 3rem)/.95 var(--f-display); text-transform: uppercase; }
+.insta-handle { margin: 0 0 14px; font-weight: 700; font-size: 1.05rem; }
+.insta-stats { display: flex; gap: 22px; margin: 0 0 14px; }
+.insta-stats dt { font: 1.4rem var(--f-display); }
+.insta-stats dd { margin: 0; font-size: .72rem; text-transform: uppercase; }
+.insta-text p { max-width: 52ch; }
+.insta-text .btn { text-transform: none; }
+.insta-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; padding: 4px; background: #fff; border: var(--line); box-shadow: 8px 8px 0 var(--pink); transform: rotate(1.5deg); transition: transform .2s; }
+.insta-grid:hover { transform: rotate(0); }
+.insta-grid img { width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; display: block; }
+
 /* ---------- Ko-fi ---------- */
 .kofi {
   display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 24px; align-items: center;
@@ -1311,6 +1328,11 @@ body.shiny .h2, body.shiny .logo, body.shiny .mega { animation: sparkle .35s ste
   .cart { padding: 16px 16px calc(20px + var(--nf) + env(safe-area-inset-bottom)); border-left: none; }
   .cart-head h2 { font-size: 1.5rem; }
   .cart-items .ci-remove { padding: 8px 0 8px 8px; }
+
+  /* Instagram */
+  .insta { grid-template-columns: minmax(0, 1fr); gap: 22px; padding: 20px 16px; box-shadow: 6px 6px 0 var(--ink); }
+  .insta-text .btn { width: 100%; }
+  .insta-grid { transform: none; box-shadow: 5px 5px 0 var(--pink); }
 
   /* Mini-Bütique & Living */
   .conseil { box-shadow: 5px 5px 0 var(--ink); }

@@ -74,6 +74,10 @@
       "Votre générosité sera transformée en impact positif, après déduction des frais de fonctionnement (97 %). Le reste améliorera le monde.",
       "Vous voulez de l'aide ? Aidez-nous d'abord. Un décaféiné suffit, idéalement oat-latte, idéalement maintenant.",
     ],
+    instagram: [
+      "Retrouvez-nous sur Instagram : une grille curatée, des stories éphémères-sédentaires et 31,4 k abonnés ressentis.",
+      "Notre Instagram est un prolongement de l'expérience. Suivre La Bütique, c'est déjà un peu y entrer. Sans co-waiting.",
+    ],
     contact: [
       "π ne répond pas directement, mais il a un Linktree : un lien qui mène à des liens. C'est très aligné.",
       "Pour joindre π, passez par son Linktree. Il vous répondra quand la question sera mûre.",
@@ -129,7 +133,8 @@
     ["living", /logement|appart|coliving|coloc|chambre|loyer|louer|habiter|quartier|immobilier|proprio/],
     ["catering", /catering|traiteur|buffet|cocktail|sushi|sashimi|tripe|terrine|repas|manger|faim|menu|cuisine|chef|plat\b/],
     ["kofi", /ko.?fi|soutenir|soutien|\bdon\b|donation|\bcafe\b|\btip\b|pourboire|aider|mecen|financer/],
-    ["contact", /contact|joindre|linktree|insta|reseau|mail|telephone|numero|ecrire/],
+    ["instagram", /insta|reseaux? sociaux|reseau|abonne|suivre|follow|story|stories/],
+    ["contact", /contact|joindre|linktree|mail|telephone|numero|ecrire/],
     ["human", /\b(humain|conseill|vrai(e)? personne|agent|operat|quelqu.un|service client)/],
     ["delfine", /del.?fine|neuro|spectre|autis|tdah|zebre/],
     ["corporate", /pi.?day|escape|brainstorm|employab|emploi|\bcv\b|\bjob|travail|stage|recrut|livrable|scope|swot|teambuilding|cpf/],
@@ -211,6 +216,7 @@
 
   const LINKS = {
     contact: ["https://linktr.ee/peter7nance", "linktr.ee/peter7nance ↗"],
+    instagram: ["https://www.instagram.com/labutique.officiel/", "@labutique.officiel ↗"],
     kofi: ["https://ko-fi.com/pierreyvessevenants", "Offrir un décaféiné (Ko-fi) ↗"],
   };
   function bubble(text, who, withLink) {
@@ -277,7 +283,7 @@
     say(reply(intent), () => {
       botCount++;
       if (botCount % 3 === 0) survey();
-    }, intent === "kofi" ? "kofi" : (intent === "contact" || intent === "human") ? "contact" : null);
+    }, intent === "kofi" ? "kofi" : intent === "instagram" ? "instagram" : (intent === "contact" || intent === "human") ? "contact" : null);
     if (intent === "human") document.dispatchEvent(new CustomEvent("bq", { detail: "bot-human" }));
   }
 
