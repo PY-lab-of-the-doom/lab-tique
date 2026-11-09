@@ -17,7 +17,7 @@
 
   /* ---------- État (stocké dans ce navigateur uniquement) ---------- */
   const KEY = "butique-army";
-  let state = { points: 0, ach: {}, pis: [], minted: [] };
+  let state = { points: 0, ach: {}, pis: [], minted: [], waited: 0 };
   try { Object.assign(state, JSON.parse(localStorage.getItem(KEY)) || {}); } catch { /* état éphémère */ }
   const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch { /* slow-storage */ } };
 
@@ -40,6 +40,9 @@
     "nft": ["Collectionneur·se unique", 50],
     "card": ["Membre de l'Army", 20],
     "pi-hunt": ["Chasseur·se de π", 314],
+    "cowaiting": ["Co-waiter d'élite", 47],
+    "code": ["Initié·e au code", 31],
+    "selfie": ["Visage aligné", 14],
   };
   const PI_TOTAL = 7, PI_PTS = 14;
 
@@ -159,6 +162,76 @@
     document.addEventListener("keydown", (e) => { if (e.key === "Escape") pc.hidden = true; });
   }
 
+  const fmtWait = (sec) => {
+    sec = Math.round(sec || 0);
+    return sec < 60 ? `${sec} s` : `${Math.floor(sec / 60)} min ${String(sec % 60).padStart(2, "0")}`;
+  };
+
+  /* Filtre π : recadre la photo et la passe dans la charte du site.
+     modes : rose, acide, pop, trame. Tout se fait dans le navigateur. */
+  function piFilter(img, mode, W, H) {
+    const out = document.createElement("canvas"); out.width = W; out.height = H;
+    const c = out.getContext("2d", { willReadFrequently: true });
+    const r = Math.max(W / img.width, H / img.height);
+    const w = img.width * r, h = img.height * r;
+    c.drawImage(img, (W - w) / 2, (H - h) / 2.6, w, h);
+    const d = c.getImageData(0, 0, W, H), px = d.data;
+    const g = new Float32Array(W * H);
+    let lo = 255, hi = 0;
+    for (let i = 0; i < g.length; i++) {
+      const v = 0.299 * px[i * 4] + 0.587 * px[i * 4 + 1] + 0.114 * px[i * 4 + 2];
+      g[i] = v; if (v < lo) lo = v; if (v > hi) hi = v;
+    }
+    const span = Math.max(1, hi - lo);
+    for (let i = 0; i < g.length; i++) g[i] = Math.min(1, Math.max(0, ((g[i] - lo) / span - 0.5) * 1.25 + 0.5));
+    const hex = (hcol) => [1, 3, 5].map((k) => parseInt(hcol.slice(k, k + 2), 16));
+    if (mode === "trame") {
+      c.fillStyle = "#f1ede2"; c.fillRect(0, 0, W, H); c.fillStyle = "#0b0b0b";
+      const cell = Math.max(6, Math.round(W / 46));
+      for (let y = 0; y < H; y += cell) for (let x = 0; x < W; x += cell) {
+        const v = g[Math.min(H - 1, y + (cell >> 1)) * W + Math.min(W - 1, x + (cell >> 1))];
+        const rad = (1 - v) * cell * 0.72;
+        if (rad > 0.4) { c.beginPath(); c.arc(x + cell / 2, y + cell / 2, rad, 0, Math.PI * 2); c.fill(); }
+      }
+      return out;
+    }
+    const pal = mode === "pop" ? ["#0b0b0b", "#2d2dff", "#ff3fa4", "#d7ff1e"].map(hex) : null;
+    const [a, b] = mode === "acide" ? [hex("#1a1aa8"), hex("#d7ff1e")] : [hex("#0b0b0b"), hex("#ff3fa4")];
+    for (let i = 0; i < g.length; i++) {
+      const v = g[i]; let col;
+      if (pal) col = pal[v < 0.27 ? 0 : v < 0.49 ? 1 : v < 0.73 ? 2 : 3];
+      else col = [a[0] + (b[0] - a[0]) * v, a[1] + (b[1] - a[1]) * v, a[2] + (b[2] - a[2]) * v];
+      px[i * 4] = col[0]; px[i * 4 + 1] = col[1]; px[i * 4 + 2] = col[2]; px[i * 4 + 3] = 255;
+    }
+    c.putImageData(d, 0, 0);
+    return out;
+  }
+
+  let photo = null;
+  const photoInput = $("#card-photo");
+  const photoPreview = $("#card-photo-preview");
+  function refreshPreview() {
+    if (!photo) { photoPreview.hidden = true; return; }
+    const f = piFilter(photo, $("#card-filter").value, 180, 230);
+    photoPreview.hidden = false;
+    const pc = $("canvas", photoPreview);
+    pc.width = 180; pc.height = 230;
+    pc.getContext("2d").drawImage(f, 0, 0);
+  }
+  if (photoInput) {
+    photoInput.addEventListener("change", () => {
+      const file = photoInput.files && photoInput.files[0];
+      if (!file) return;
+      const url = URL.createObjectURL(file);
+      const img = new Image();
+      img.onload = () => { photo = img; refreshPreview(); URL.revokeObjectURL(url); };
+      img.onerror = () => { $("#card-error").textContent = "Cette image n'est pas alignée (format non reconnu)."; URL.revokeObjectURL(url); };
+      img.src = url;
+    });
+    $("#card-filter").addEventListener("change", refreshPreview);
+    $("#card-photo-remove").addEventListener("click", () => { photo = null; photoInput.value = ""; refreshPreview(); });
+  }
+
   /* ---------- Carte de fidélité ---------- */
   const form = $("#card-form");
   const canvas = $("#card-canvas");
@@ -201,11 +274,12 @@
       ["TAUX VIBRATOIRE", data.hz],
       ["SUCCÈS", `${Object.keys(state.ach).length}/${Object.keys(ACH).length}`],
       ["π TROUVÉS", `${state.pis.length}/${PI_TOTAL}`],
+      ["CO-WAITING", fmtWait(state.waited)],
     ];
     rows.forEach(([k, v], i) => {
-      const x = 40 + (i % 2) * 330, y = 320 + Math.floor(i / 2) * 84;
-      c.fillStyle = "#0b0b0b"; c.font = "18px 'Space Mono', monospace"; c.fillText(k, x, y);
-      c.font = "34px 'Archivo Black', Impact, sans-serif"; c.fillText(v, x, y + 40, 300);
+      const x = 40 + (i % 3) * 225, y = 320 + Math.floor(i / 3) * 84;
+      c.fillStyle = "#0b0b0b"; c.font = "16px 'Space Mono', monospace"; c.fillText(k, x, y, 210);
+      c.font = "32px 'Archivo Black', Impact, sans-serif"; c.fillText(v, x, y + 38, 205);
     });
     // mantra
     c.font = "italic 32px 'Instrument Serif', Georgia, serif";
@@ -221,13 +295,26 @@
       if (x > W - 40) break;
     }
     c.font = "14px 'Space Mono', monospace"; c.fillText("3 1415 9265 3589", 760, 600);
-    // sticker π
-    c.save(); c.translate(860, 300); c.rotate(0.2);
-    c.fillStyle = "#ff3fa4"; c.strokeStyle = "#0b0b0b"; c.lineWidth = 6;
-    c.beginPath(); c.arc(0, 0, 96, 0, Math.PI * 2); c.fill(); c.stroke();
-    c.fillStyle = "#0b0b0b"; c.font = "italic 130px 'Instrument Serif', Georgia, serif";
-    c.textAlign = "center"; c.fillText("π", 0, 40);
-    c.restore();
+    // photo filtrée (ou grand sticker π)
+    const sticker = (cx, cy, r, size) => {
+      c.save(); c.translate(cx, cy); c.rotate(0.2);
+      c.fillStyle = "#ff3fa4"; c.strokeStyle = "#0b0b0b"; c.lineWidth = 6;
+      c.beginPath(); c.arc(0, 0, r, 0, Math.PI * 2); c.fill(); c.stroke();
+      c.fillStyle = "#0b0b0b"; c.font = `italic ${size}px 'Instrument Serif', Georgia, serif`;
+      c.textAlign = "center"; c.fillText("π", 0, size * 0.3);
+      c.restore();
+    };
+    if (photo) {
+      const pw = 226, ph = 288, f = piFilter(photo, data.filter, pw * 2, ph * 2);
+      c.save(); c.translate(856, 296); c.rotate(-0.05);
+      c.fillStyle = "#0b0b0b"; c.fillRect(-pw / 2 + 10, -ph / 2 + 10, pw, ph);
+      c.drawImage(f, -pw / 2, -ph / 2, pw, ph);
+      c.strokeStyle = "#0b0b0b"; c.lineWidth = 6; c.strokeRect(-pw / 2, -ph / 2, pw, ph);
+      c.restore();
+      sticker(966, 160, 44, 62);
+    } else {
+      sticker(860, 300, 96, 130);
+    }
     // cadre
     c.strokeStyle = "#0b0b0b"; c.lineWidth = 8; c.strokeRect(4, 4, W - 8, H - 8);
   }
@@ -242,7 +329,8 @@
       err.textContent = "";
       memberNo = memberNo || `314-${String(Math.floor(1000 + Math.random() * 8999))}`;
       unlock("card");
-      await drawCard({ name, hz: form.elements.hz.value, mantra: form.elements.mantra.value.trim() });
+      if (photo) unlock("selfie");
+      await drawCard({ name, hz: form.elements.hz.value, mantra: form.elements.mantra.value.trim(), filter: form.elements.filter.value });
       $("#card-result").hidden = false;
       $("#card-result").scrollIntoView({ block: "nearest", behavior: still.matches ? "auto" : "smooth" });
     });
@@ -265,6 +353,121 @@
       setTimeout(() => window.print(), 50);
     });
   }
+
+  /* ---------- Co-waiting™ ---------- */
+  const cw = $("#cowait");
+  if (cw) {
+    const posEl = $("#cw-pos"), timeEl = $("#cw-time"), logEl = $("#cw-log"), bar = $("#cw-bar");
+    const joinBtn = $("#cw-join"), acts = $("#cw-actions");
+    const DURATION = 194, START = 47;
+    const EVENTS = [
+      ["Un·e Ambassadeur·rice passe devant vous, avec bienveillance.", 1],
+      ["π passe devant tout le monde. C'est son droit.", 1],
+      ["Un membre du Cercle π vous double. Il vous sourit.", 1],
+      ["Quelqu'un devant vous abandonne. Il n'était pas aligné.", -1],
+      ["Un influenceur est exfiltré par l'entrée de service.", -1],
+      ["La file avance. Vous aussi, intérieurement.", -1],
+      ["Distribution d'hydratation consciente (14 €). Personne ne bouge.", 0],
+      ["On vous propose de passer en co-waiting premium. Vous déclinez. Vous reculez.", 1],
+    ];
+    let pos = START, t0 = 0, timer = 0, net = 0, running = false;
+    const log = (m) => {
+      const li = document.createElement("li"); li.textContent = m;
+      logEl.prepend(li);
+      while (logEl.children.length > 4) logEl.lastChild.remove();
+    };
+    const elapsed = () => (Date.now() - t0) / 1000;
+    function paint() {
+      posEl.textContent = `N°${NB}${pos}`;
+      const e = Math.min(DURATION, elapsed());
+      timeEl.textContent = fmtWait(e);
+      bar.style.width = `${(e / DURATION) * 100}%`;
+    }
+    function finish() {
+      clearInterval(timer); running = false;
+      pos = 1; paint();
+      state.waited = (state.waited || 0) + DURATION; save();
+      log("C'est votre tour ! … La Bütique est fermée (slow-retail). Réouverture : bientôt-toujours.");
+      cw.classList.add("done");
+      acts.hidden = true;
+      joinBtn.hidden = false; joinBtn.textContent = "Recommencer à attendre";
+      unlock("cowaiting");
+      render();
+    }
+    function tick() {
+      const e = elapsed();
+      if (e >= DURATION) return finish();
+      const r = Math.random();
+      if (r < 0.18) { const [m, d] = EVENTS[Math.floor(Math.random() * EVENTS.length)]; pos += d; log(m); }
+      else if (r < 0.78) pos -= 1;
+      // jamais n°1 avant 3 min 14, jamais au-delà du départ + 10
+      const floor = Math.max(2, Math.round(START * (1 - e / DURATION)) - 4);
+      pos = Math.min(START + 10, Math.max(floor, pos));
+      paint();
+    }
+    joinBtn.addEventListener("click", () => {
+      pos = START; t0 = Date.now(); net = 0; running = true;
+      logEl.innerHTML = ""; cw.classList.remove("done");
+      log("Vous rejoignez la file. Bienvenue dans le co-waiting.");
+      joinBtn.hidden = true; acts.hidden = false;
+      paint(); clearInterval(timer); timer = setInterval(tick, 2000);
+    });
+    acts.addEventListener("click", (e) => {
+      const b = e.target.closest("button"); if (!b || !running) return;
+      const a = b.dataset.cw;
+      if (a === "meditate") log("Vous méditez en attendant. La file aussi.");
+      if (a === "network") {
+        if (net < 5) { net++; addPoints(3); log(`Silent networking réussi (${net}/5) : vous avez regardé quelqu'un sans lui parler. +3 pts.`); }
+        else log("Votre réseau silencieux est saturé. Respirez.");
+      }
+      if (a === "report") { pos = Math.min(START + 10, pos + 3); log("Signalement enregistré. Par souci d'équité, vous reculez de 3 places."); paint(); }
+    });
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden && running) { pos = Math.min(START + 10, pos + 5); log("Vous vous êtes absenté·e. Le co-waiting exige votre présence : −5 places."); paint(); }
+    });
+  }
+
+  /* ---------- Code secret : 3,1416 ---------- */
+  const DIGITS = "31415926535897932384626433832795028841971693993751";
+  let codeTurn = 0;
+  function runCode() {
+    unlock("code");
+    const mode = ["delfine", "pi", "reveal"][codeTurn++ % 3];
+    if (mode === "delfine") {
+      notify("Mode Del-Fine™ activé (10 s)", 0, "Code 3,1416");
+      if (still.matches) return;
+      const main = $("main"); let n = 0;
+      const jolt = () => {
+        if (n++ > 12) { main.style.transform = ""; return; }
+        main.style.transform = `rotate(${(Math.random() * 1.6 - .8).toFixed(2)}deg) translate(${Math.round(Math.random() * 14 - 7)}px, ${Math.round(Math.random() * 10 - 5)}px)`;
+        setTimeout(jolt, 400 + Math.random() * 1100);
+      };
+      jolt();
+    } else if (mode === "pi") {
+      notify("Mode π activé (8 s)", 0, "Code 3,1416");
+      const heads = $$(".h2, .hero-lead, .lead");
+      const saved = heads.map((h) => h.innerHTML);
+      heads.forEach((h, i) => { h.textContent = DIGITS.slice(0, Math.max(6, Math.min(48, h.textContent.length))).replace(/^3/, "3,"); });
+      setTimeout(() => heads.forEach((h, i) => (h.innerHTML = saved[i])), 8000);
+    } else {
+      notify("Révélation imminente", 0, "Code 3,1416");
+      document.dispatchEvent(new CustomEvent("bq-reveal"));
+    }
+  }
+  document.addEventListener("bq-code", runCode);
+  let typed = "";
+  document.addEventListener("keydown", (e) => {
+    if (e.target.closest && e.target.closest("input, textarea, select")) return;
+    if (!/^[0-9]$/.test(e.key)) return;
+    typed = (typed + e.key).slice(-5);
+    if (typed === "31416") { typed = ""; runCode(); }
+  });
+  let taps = [];
+  $$(".logo").forEach((l) => l.addEventListener("click", (e) => {
+    const now = Date.now();
+    taps = taps.filter((t) => now - t < 900); taps.push(now);
+    if (taps.length >= 3) { taps = []; e.preventDefault(); runCode(); }
+  }));
 
   /* ---------- Bücoin ---------- */
   const priceEl = $("#bu-price");

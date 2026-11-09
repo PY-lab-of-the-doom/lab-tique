@@ -298,11 +298,11 @@ mark.m-blue { background: var(--blue); color: #fff; }
 /* ---------- Agenda ---------- */
 .agenda { list-style: none; margin: 0; padding: 0; border-top: var(--line); }
 .event {
-  display: grid; grid-template-columns: 150px 1fr auto; gap: 16px 28px; align-items: center;
+  display: grid; grid-template-columns: 210px minmax(0, 1fr) auto; gap: 16px 28px; align-items: center;
   padding: 22px 0; border-bottom: var(--line);
 }
 .event:hover { background: #fff; }
-.event-date { font: 1.8rem/1 var(--f-display); text-transform: uppercase; padding-left: 8px; }
+.event-date { font: 1.7rem/1 var(--f-display); text-transform: uppercase; padding-left: 8px; min-width: 0; overflow-wrap: anywhere; }
 .event-date small { display: block; font: 700 .75rem var(--f-mono); margin-top: 6px; }
 .event h3 { margin: 0 0 6px; font: 1.35rem/1.1 var(--f-display); text-transform: uppercase; }
 .event p { margin: 0; max-width: 60ch; }
@@ -771,6 +771,35 @@ mark.m-blue { background: var(--blue); color: #fff; }
 .card-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px; }
 .card-note { font-size: .74rem; margin: 12px 0 0; }
 
+/* Photo de la carte */
+.photo-label { font-weight: 700; text-transform: uppercase; font-size: .8rem; }
+.photo-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: stretch; }
+.photo-row select { flex: 1 1 180px; width: auto; }
+.photo-btn { text-transform: none; }
+.photo-btn:focus-within, #card-photo:focus-visible + .photo-btn { outline: 3px dashed var(--blue); }
+.photo-preview { display: flex; align-items: flex-end; gap: 12px; }
+.photo-preview canvas { width: 120px; height: auto; border: var(--line); box-shadow: 4px 4px 0 var(--ink); transform: rotate(-3deg); }
+.photo-remove { background: none; border: none; padding: 4px 0; font: 700 .72rem var(--f-mono); text-decoration: underline; cursor: pointer; color: var(--ink); }
+.photo-note { margin: 0; font-size: .72rem; opacity: .8; }
+
+/* Co-waiting */
+.cowait { margin: 0 0 32px; padding: clamp(18px, 3vw, 28px); background: var(--acid); border: var(--line); box-shadow: var(--shadow); }
+.cw-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(220px, 300px); gap: 24px; align-items: center; margin-bottom: 18px; }
+.cw-title { margin: 4px 0 10px; font: clamp(1.8rem, 4vw, 2.8rem)/.95 var(--f-display); text-transform: uppercase; }
+.cw-title sup { font-size: .35em; vertical-align: top; }
+.cw-lead { margin: 0; max-width: 60ch; }
+.cw-board { background: var(--ink); color: var(--paper); padding: 16px; border: var(--line); box-shadow: 6px 6px 0 var(--pink); }
+.cw-pos { margin: 0; font: clamp(2.6rem, 6vw, 3.8rem)/1 var(--f-display); color: var(--acid); }
+.cw-time { margin: 8px 0 10px; font-size: .8rem; }
+.cw-track { height: 10px; background: #333; border: 1px solid var(--paper); }
+.cw-track span { display: block; height: 100%; width: 0; background: var(--pink); transition: width 1.8s linear; }
+.cw-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.cw-log { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 6px; }
+.cw-log:empty { display: none; }
+.cw-log li { padding: 8px 10px; background: #fff; border: 2px solid var(--ink); font-size: .82rem; }
+.cw-log li:first-child { box-shadow: 3px 3px 0 var(--pink); font-weight: 700; }
+.cowait.done .cw-pos { color: var(--pink); }
+
 /* Barre live : points */
 .live-pts { margin-left: auto; text-decoration: none; color: var(--paper); border: 1px solid var(--acid); padding: 1px 8px; border-radius: 999px; }
 .live-pts:hover { background: var(--acid); color: var(--ink); }
@@ -1116,6 +1145,10 @@ body.shiny .h2, body.shiny .logo, body.shiny .mega { animation: sparkle .35s ste
   .cart-items .ci-remove { padding: 8px 0 8px 8px; }
 
   /* Club, écosystème, méditation */
+  .cw-head { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .cowait { padding: 16px; box-shadow: 5px 5px 0 var(--ink); }
+  .cowait > .btn, .cw-actions .btn { width: 100%; }
+  .photo-btn { width: 100%; }
   .live-pts { display: none; }
   .club-status { padding: 16px; box-shadow: 5px 5px 0 var(--ink); }
   .tiers { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; margin: 0 -16px 32px; padding: 14px 16px 12px; border: none; background: none; box-shadow: none; scrollbar-width: none; }

@@ -253,6 +253,10 @@
   function handle(text) {
     if (!text.trim() || busy) return;
     bubble(text.trim(), "user");
+    if (/3[.,\s]?1416/.test(text.replace(/\s+/g, ""))) {
+      say(fix("Code reconnu. Votre accès a été élevé au rang d'initié·e. Je déclenche le protocole π."), () => document.dispatchEvent(new CustomEvent("bq-code")));
+      return;
+    }
     const intent = detect(text);
     say(reply(intent), () => {
       botCount++;
@@ -260,6 +264,13 @@
     }, intent === "kofi" ? "kofi" : (intent === "contact" || intent === "human") ? "contact" : null);
     if (intent === "human") document.dispatchEvent(new CustomEvent("bq", { detail: "bot-human" }));
   }
+
+  document.addEventListener("bq-reveal", () => {
+    if (panel.hidden) open();
+    setTimeout(() => say(fix("Très bien. Puisque vous avez le code, je peux enfin vous révéler ce que vend La Bütique. Il s'agit, tout simplement, d'un"), () => {
+      setTimeout(() => say(fix("[Connexion avec π perdue. Le reste de cette réponse a été mis en liste d'attente.]")), 900);
+    }), started ? 200 : 2600);
+  });
 
   function open() {
     panel.hidden = false;

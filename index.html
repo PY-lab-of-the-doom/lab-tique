@@ -157,7 +157,7 @@
     <article class="pillar p-acid">
       <span class="pillar-num">01</span>
       <h3>Éphémère&#8209;Sédentaire</h3>
-      <p>Nous sommes un pop-up permanent. Nous ouvrons pour une durée limitée, illimitée. Le bail est signé pour neuf ans, mais l'intention, elle, se renouvelle chaque matin. C'est ce que nous appelons le <em>long-term ephemeral</em>.</p>
+      <p>Nous sommes un pop-up permanent. Nous ouvrons pour une durée limitée, illimitée. Le bail est signé pour neuf ans, mais l'intention, elle, se renouvelle chaque matin. C'est ce que nous appelons le <em>long-term ephemeral</em> : un éphémère intemporel.</p>
       <p class="pillar-foot">Bail 3-6-9 · Mood 24 h</p>
     </article>
     <article class="pillar p-pink">
@@ -219,7 +219,7 @@
     <span class="section-num">§03</span>
     <h2 class="h2">La Cöllectiön</h2>
   </header>
-  <p class="lead">Saison 0 (perpétuelle). Les pièces ci-dessous sont disponibles, indisponibles, ou les deux. Visuels non contractuels. Livraison en <strong>click &amp; walk</strong> : vous venez, vous repartez, le reste vous appartient.</p>
+  <p class="lead">Saison 0 (perpétuelle). Des pièces intemporelles, renouvelées chaque matin. Les pièces ci-dessous sont disponibles, indisponibles, ou les deux. Visuels non contractuels. Livraison en <strong>click &amp; walk</strong> : vous venez, vous repartez, le reste vous appartient.</p>
 
   <div class="filters" role="group" aria-label="Filtrer la collection" id="filters"></div>
 
@@ -340,7 +340,7 @@
       <h3>π <small>— Fondateur, coach en maïeutique</small></h3>
       <p>π ne se présente pas. π vous pose des questions, puis vous laisse y répondre seul·e, à 314 € la séance.</p>
       <p>Formé à la maïeutique socratique en autodidacte, π a accompagné plus de 3,14159 entrepreneurs dans l'accouchement de leur vision. Il ne donne jamais de réponse : il aide les réponses à se donner elles-mêmes.</p>
-      <p>Avant La Bütique, π a mené une triple carrière d'excellence. <strong>Expert dans l'administration</strong>, il y a perfectionné l'art du formulaire en trois exemplaires et du rendez-vous non prioritaire. <strong>Enseignant</strong>, il a transmis à des générations d'élèves le goût de la question sans réponse. <strong>Conférencier</strong>, il intervient aujourd'hui sur scène, en visio et dans les espaces de coworking qui le sollicitent, ou non.</p>
+      <p>Avant La Bütique, π a mené une triple carrière d'excellence. <strong>Expert dans l'administration</strong>, il y a perfectionné l'art du formulaire en trois exemplaires et du rendez-vous non prioritaire. <strong>Enseignant</strong>, il a transmis à des générations d'<s>élèves</s> CCRACS (Citoyens Consommateurs Responsables Actifs Critiques et Solidaires) le goût de la question sans réponse. <strong>Conférencier</strong>, il intervient aujourd'hui sur scène, en visio et dans les espaces de coworking qui le sollicitent, ou non.</p>
       <p>Il a ensuite été <em>Head of Questions</em> dans une start-up qu'il préfère ne pas nommer, puis <em>Chief Uncertainty Officer</em> en freelance. Il se définit aujourd'hui comme irrationnel, transcendant et infini.</p>
       <p>Lorsqu'on lui demande ce que vend La Bütique, π répond : « Et vous, qu'êtes-vous venu·e chercher ? » La séance est alors facturée.</p>
       <blockquote>« Je ne vends rien. J'accompagne le besoin d'acheter jusqu'à sa naissance. »<cite>— π</cite></blockquote>
@@ -514,7 +514,7 @@
     <p class="club-rank">Votre rang : <b data-bq-tier>Curieux·se</b> · ◆ <b data-bq-points>0</b> Bütique Points</p>
     <div class="club-bar"><span id="club-progress"></span></div>
     <p class="club-next" id="club-next">Prochain rang : Initié·e, encore 100 pts</p>
-    <p class="club-hint">Comment gagner des points ? En interagissant avec le site. Tout ce que vous faites est valorisé, sauf acheter.</p>
+    <p class="club-hint">Comment gagner des points ? En interagissant avec le site. Tout ce que vous faites est valorisé, sauf acheter. Les initié·es connaissent aussi un code à six caractères.</p>
   </div>
 
   <ol class="tiers">
@@ -524,6 +524,28 @@
     <li class="tier" data-tier="cercle"><span class="tier-min">600 pts</span><h3>Cercle π</h3><p class="tier-price">Communiqué oralement</p><p>Accès aux pièces réservées. Co-waiting à l'intérieur. π vous regarde.</p></li>
     <li class="tier" data-tier="majuscule"><span class="tier-min">3 141 pts</span><h3>Π (majuscule)</h3><p class="tier-price">Inestimable</p><p>Niveau ultime. Personne ne l'a jamais atteint, pas même π.</p></li>
   </ol>
+
+  <div class="cowait" id="cowait">
+    <div class="cw-head">
+      <div>
+        <p class="contact-kicker">Salle d'attente virtuelle</p>
+        <h3 class="cw-title">Le Co-waiting<sup>™</sup></h3>
+        <p class="cw-lead">Faire la queue, enfin rebrandé. Rejoignez la file, avancez, reculez, grandissez. Durée estimée : 3 min 14. Votre temps de co-waiting sera gravé sur votre carte de fidélité.</p>
+      </div>
+      <div class="cw-board">
+        <p class="cw-pos" id="cw-pos">N° 47</p>
+        <p class="cw-time">Temps de co-waiting : <b id="cw-time">0 s</b></p>
+        <div class="cw-track"><span id="cw-bar"></span></div>
+      </div>
+    </div>
+    <button class="btn btn-pink btn-lg" type="button" id="cw-join">Rejoindre la file</button>
+    <div class="cw-actions" id="cw-actions" hidden>
+      <button class="btn btn-sm" type="button" data-cw="meditate">Méditer en attendant</button>
+      <button class="btn btn-sm" type="button" data-cw="network">Silent networking</button>
+      <button class="btn btn-sm" type="button" data-cw="report">Signaler un dépassement</button>
+    </div>
+    <ol class="cw-log" id="cw-log" aria-live="polite"></ol>
+  </div>
 
   <div class="club-grid">
     <div class="club-ach">
@@ -552,6 +574,25 @@
         <div class="field">
           <label for="card-mantra">Votre mantra d'achat</label>
           <input id="card-mantra" name="mantra" maxlength="52" placeholder="Je mérite ce que je ne comprends pas">
+        </div>
+        <div class="field photo-field">
+          <span class="photo-label">Votre photo (facultatif)</span>
+          <div class="photo-row">
+            <label class="btn btn-sm photo-btn" for="card-photo">📷 Prendre ou choisir une photo</label>
+            <input class="sr-only" type="file" id="card-photo" accept="image/*">
+            <label class="sr-only" for="card-filter">Filtre π</label>
+            <select id="card-filter" name="filter">
+              <option value="rose">Filtre π : période rose</option>
+              <option value="acide">Filtre π : période acide</option>
+              <option value="trame">Filtre π : période sérigraphie</option>
+              <option value="pop">Filtre π : période pop</option>
+            </select>
+          </div>
+          <div class="photo-preview" id="card-photo-preview" hidden>
+            <canvas width="180" height="230" aria-label="Aperçu de votre photo avec le filtre π"></canvas>
+            <button class="photo-remove" type="button" id="card-photo-remove">Retirer la photo</button>
+          </div>
+          <p class="photo-note">Votre photo reste sur votre appareil : elle n'est envoyée nulle part, pas même à π.</p>
         </div>
         <label class="check"><input type="checkbox" name="pledge" required> Je prête l'Army Pledge : je m'engage à co-attendre avec dignité.</label>
         <p class="form-error" id="card-error" role="alert"></p>
