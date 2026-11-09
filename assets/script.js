@@ -211,6 +211,21 @@
     renderProducts(b.dataset.cat);
   });
 
+  /* ---------- π-Day ---------- */
+  const pdToggle = $(".piday-toggle");
+  pdToggle.addEventListener("click", () => {
+    const open = $("#piday").classList.toggle("expanded");
+    pdToggle.setAttribute("aria-expanded", String(open));
+    pdToggle.textContent = open ? "Replier ↑" : "Voir les 11 points ↓";
+  });
+  const PIDAY_MSGS = [
+    "Candidature reçue. Nous reviendrons vers vous asap, dans une logique d'amélioration continue.",
+    "Merci. Votre profil a été mis en stand-by le temps de challenger votre motivation.",
+    "Votre candidature est hors scope. Nous la reprenons en off-line.",
+    "Bien noté. On se fait un point pour faire le point.",
+  ];
+  $("[data-piday]").addEventListener("click", () => toast(pick(PIDAY_MSGS)));
+
   /* ---------- Del-Fine : info-dump repliable (mobile) ---------- */
   const dfToggle = $(".delfine-toggle");
   dfToggle.addEventListener("click", () => {
@@ -364,6 +379,7 @@
     { d: "24 DÉC", s: "Vendredi · 14 h – 16 h", t: "Nocturne", p: "Une nocturne en plein jour, pour celles et ceux qui ne sortent pas le soir.", price: "20 €" },
     { d: "30 FÉV", s: "Jeudi · toute la journée", t: "Pop-up dans le pop-up", p: "Une boutique éphémère à l'intérieur de notre boutique éphémère-sédentaire, pour une durée encore plus limitée.", price: "90 €", st: "cancel" },
     { d: "08 MARS", s: "Mercredi · 8 h 08", t: "Brunch Empowerment", p: "Un brunch réservé aux femmes dirigeantes, ouvert par une keynote de π, qui prendra la parole en premier pour ne pas influencer les échanges.", price: "88 € (après remise de 8 %)", st: "full" },
+    { d: "14 MARS", s: "Jour ouvré · 9 h 00 – 17 h 59", t: "π-Day : Escape-Storming™", p: "Brainstorming + escape game : on ne sort qu'avec un livrable. Ordre du jour détaillé ci-dessus.", price: "314 € HT", st: "wait" },
     { d: "15 MARS", s: "Mercredi · 20 h", t: "Soirée Retour de Mission", p: "π projette les 1 400 photos de son voyage de repérage là-bas, dont 1 380 où il figure. Cocktails aux fruits locaux de là-bas, acheminés par avion pour l'occasion.", price: "65 € (dont 1 € reversé là-bas)", st: "wait" },
     { d: "JEUDIS", s: "Hebdomadaire · 19 h", t: "Swap de ressentis", p: "Apportez une émotion dont vous ne vous servez plus. Repartez avec celle de quelqu'un d'autre. Néo-troc 100 % circulaire.", price: "12 €" },
     { d: "DIMANCHES", s: "Square voisin · 12 h 30", t: "Food-sharing nomade", p: "Chacun apporte son repas et le consomme assis sur l'herbe, en communauté. Couverture pre-loved fournie (caution 40 €).", price: "18 €", st: "wait" },

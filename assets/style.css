@@ -312,6 +312,52 @@ mark.m-blue { background: var(--blue); color: #fff; }
 .status-wait { background: var(--acid); }
 .status-cancel { background: var(--ink); color: var(--paper); }
 
+/* ---------- π-Day (escape-storming) ---------- */
+.piday {
+  margin: 0 0 48px; background: var(--blue); color: #fff;
+  border: var(--line); box-shadow: 10px 10px 0 var(--ink);
+}
+.piday-head { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: clamp(18px, 3vw, 36px); padding: clamp(20px, 3vw, 36px); border-bottom: var(--line); }
+.piday-date {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  width: 150px; aspect-ratio: 1; background: var(--acid); color: var(--ink);
+  border: var(--line); box-shadow: 6px 6px 0 var(--ink); transform: rotate(-4deg);
+}
+.piday-date span { font: 4.4rem/0.9 var(--f-display); }
+.piday-date small { font: 700 1rem var(--f-mono); letter-spacing: .2em; }
+.piday-date em { font-size: 1.4rem; }
+.piday-kicker { margin: 0 0 10px; font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--acid); }
+.piday-title { margin: 0 0 14px; font: clamp(2.2rem, 5.4vw, 4.6rem)/.95 var(--f-display); letter-spacing: -.03em; }
+.piday-title sup { font-size: .3em; vertical-align: top; }
+.piday-lead { margin: 0; max-width: 70ch; font-size: 1.02rem; }
+.piday-lead strong { background: #fff; color: var(--ink); padding: 0 .25em; }
+.piday-body { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+.piday h4 { margin: 0 0 16px; font: 1.2rem var(--f-display); text-transform: uppercase; }
+.piday-agenda { padding: clamp(20px, 3vw, 36px); background: var(--paper); color: var(--ink); border-right: var(--line); }
+.piday-toggle { display: none; }
+.piday-steps { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--ink); }
+.piday-steps li { display: grid; grid-template-columns: 84px minmax(0, 1fr); gap: 14px; padding: 12px 0; border-bottom: 2px solid var(--ink); }
+.piday-steps time { font: 1rem var(--f-display); }
+.piday-steps strong { display: block; text-transform: uppercase; font-size: .9rem; }
+.piday-steps span { display: block; font-size: .86rem; line-height: 1.45; }
+.piday-steps li:nth-child(4) time, .piday-steps li:nth-child(7) time { background: var(--pink); padding: 0 4px; align-self: start; }
+.piday-side { padding: clamp(20px, 3vw, 36px); display: flex; flex-direction: column; gap: 20px; }
+.piday-gains { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.piday-gains li { position: relative; padding-left: 28px; font-size: .92rem; }
+.piday-gains li::before { content: "↗"; position: absolute; left: 0; top: 0; color: var(--acid); font-weight: 700; }
+.piday-info { margin: 0; display: grid; gap: 0; border: 2px solid #fff; }
+.piday-info div { padding: 10px 12px; border-bottom: 2px solid #fff; }
+.piday-info div:last-child { border-bottom: none; }
+.piday-info dt { font-size: .68rem; text-transform: uppercase; color: var(--acid); }
+.piday-info dd { margin: 2px 0 0; font-size: .88rem; }
+.piday-price { margin: 0; font: 2.2rem/1 var(--f-display); }
+.piday-price small { display: block; margin-top: 8px; font: .74rem/1.45 var(--f-mono); }
+.piday-side .btn { width: 100%; }
+@media (max-width: 900px) {
+  .piday-body { grid-template-columns: minmax(0, 1fr); }
+  .piday-agenda { border-right: none; border-bottom: var(--line); }
+}
+
 /* ---------- Pi ---------- */
 .pi { display: grid; grid-template-columns: minmax(200px, 360px) 1fr; gap: clamp(28px, 5vw, 64px); align-items: start; }
 .pi-portrait {
@@ -684,6 +730,23 @@ mark.m-blue { background: var(--blue); color: #fff; }
   .event h3 { font-size: 1.15rem; }
   .event-side { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 10px 14px; padding: 6px 0 0; }
   .event-side .btn { flex: 1 0 100%; min-height: 44px; }
+
+  /* π-Day */
+  .piday { margin-bottom: 36px; box-shadow: 6px 6px 0 var(--ink); }
+  .piday-head { grid-template-columns: minmax(0, 1fr); padding: 20px 16px; }
+  .piday-date { width: 112px; flex-direction: row; aspect-ratio: auto; gap: 8px; padding: 10px 14px; width: fit-content; box-shadow: 4px 4px 0 var(--ink); }
+  .piday-date span { font-size: 2.4rem; }
+  .piday-date em { display: none; }
+  .piday-title { font-size: 2.1rem; }
+  .piday-lead { font-size: .92rem; }
+  .piday-agenda, .piday-side { padding: 20px 16px; }
+  .piday-toggle { display: flex; width: 100%; justify-content: space-between; background: #fff; font-size: .78rem; min-height: 48px; }
+  .piday:not(.expanded) .piday-steps { display: none; }
+  .piday.expanded .piday-toggle { background: var(--acid); margin-bottom: 16px; }
+  .piday-steps li { grid-template-columns: 64px minmax(0, 1fr); gap: 10px; }
+  .piday-steps time { font-size: .85rem; }
+  .piday-price { font-size: 1.9rem; }
+  .piday-side .btn { font-size: .82rem; }
 
   /* π */
   .pi-portrait { max-width: 230px; margin: 0 auto; box-shadow: 8px 8px 0 var(--ink); }
