@@ -211,6 +211,27 @@
     renderProducts(b.dataset.cat);
   });
 
+  /* ---------- Portrait de π : diaporama des quatre périodes ---------- */
+  const portrait = $(".pi-portrait");
+  if (portrait) {
+    const slides = [...portrait.querySelectorAll("img")];
+    const capText = $("#pi-caption-text"), capNum = $("#pi-caption-num");
+    let cur = 0, timer = 0, onScreen = false;
+    const still = window.matchMedia("(prefers-reduced-motion: reduce)");
+    function show(i) {
+      slides[cur].classList.remove("active");
+      cur = (i + slides.length) % slides.length;
+      slides[cur].classList.add("active");
+      capText.textContent = slides[cur].dataset.caption;
+      capNum.textContent = `${cur + 1}/${slides.length}`;
+    }
+    function play() { if (!timer && onScreen && !still.matches && !document.hidden) timer = setInterval(() => show(cur + 1), 3200); }
+    function pause() { clearInterval(timer); timer = 0; }
+    portrait.addEventListener("click", () => { pause(); show(cur + 1); play(); });
+    new IntersectionObserver(([en]) => { onScreen = en.isIntersecting; onScreen ? play() : pause(); }).observe(portrait);
+    document.addEventListener("visibilitychange", () => (document.hidden ? pause() : play()));
+  }
+
   /* ---------- π-Day ---------- */
   const pdToggle = $(".piday-toggle");
   pdToggle.addEventListener("click", () => {
